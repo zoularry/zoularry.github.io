@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hide Something</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="assets/fonts/line-icons.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/owl.theme.css">
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="assets/css/slick.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+    <style>
+        .help-nav {
+            margin: 40px 0 30px 0;
+            text-align: center;
+        }
+
+        .help-nav a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 8px 24px;
+            border-radius: 20px;
+            background: #f5f5f5;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .help-nav a.active,
+        .help-nav a:hover {
+            background: #3f51b5;
+            color: #fff;
+        }
+
+        .content-section {
+            display: none;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            padding: 32px 24px;
+            margin-bottom: 40px;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body style="color: #333;">
+
+    <!-- Header Area wrapper Starts -->
+    <header id="header-wrap">
+        <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar indigo">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar"
+                        aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="icon-menu"></span>
+                        <span class="icon-menu"></span>
+                        <span class="icon-menu"></span>
+                    </button>
+                    <a href="index.html" class="navbar-brand"><img src="assets/img/logo_hs.png" alt=""></a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                    <ul class="navbar-nav mr-auto w-100 justify-content-left clearfix">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">首页</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">帮助中心</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="pp.html">隐私政策</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="section-padding" style="padding-top:100px;min-height:70vh;">
+        <div class="container">
+            <!-- <div class="section-header text-center">
+                <h2 class="section-title wow fadeInDown" data-wow-delay="0.2s">Move Data to New Phone</h2>
+                <p class="wow fadeInUp" data-wow-delay="0.3s">常见问题与操作指引</p>
+            </div> -->
+
+            <div id="en" class="content-section">
+
+                <p class="alert alert-primary">When setting up a new phone, most people use a data migration tool. How
+                    do you transfer the hidden files from HD SMTH?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">If You Haven't Used the Phone's Migration Tool Yet
+                </h2>
+                <p>Standard transfer tools typically do not migrate hidden files. To ensure your hidden photos and
+                    videos are transferred to your new phone, follow these steps:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Before</strong> using your phone's migration tool:</li>
+                            <li><strong>Unhide</strong> all files using <strong>HD SMTH</strong> on your <strong>old
+                                    phone</strong></li>
+                            <li>2. Then use your phone's migration tool</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Reason:</strong> Migration tools only transfer <strong>visible</strong> photos and
+                            videos, not hidden data.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">If You Already Used the Phone's Migration Tool</h2>
+
+                <p>If you have already used the migration tool without restoring hidden files first, you will not find
+                    the hidden files on new phone. </p>
+                <p>There are two options to transfer them.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Simple Method (Phones Only)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. On <strong>old phone</strong>: Open <strong>HD SMTH</strong> → Unhide all files</li>
+                            <li>2. On <strong>both phones</strong>: Install and open <strong>Local Send</strong> App
+                                (Google Play Store)</li>
+                            <li>3. On <strong>old phone</strong>: Select unhidden files in <strong>Local Send</strong> →
+                                Send</li>
+                            <li>4. On <strong>new phone</strong>: Accept files in <strong>Local Send</strong></li>
+                            <li>5. After transfer: Open <strong>HD SMTH</strong> on new phone → Hide those files</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Fast Method (Requires Windows PC)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1, Connect <strong>old phone</strong> to PC via USB cable</li>
+                            <li>2. Select <strong>"File Transfer"</strong> mode on phone</li>
+                            <li>3. On PC: Open <strong>File Explorer → This PC</strong></li>
+                            <li>4. Copy <strong>.pg folder</strong> from phone's root directory to PC</li>
+                            <li>5. Disconnect old phone</li>
+                            <li>6. Connect <strong>new phone</strong> to PC</li>
+                            <li>7. Select <strong>"File Transfer"</strong> mode</li>
+                            <li>8. Paste <strong>.pg folder</strong> to new phone's root directory</li>
+                            <li>9. Disconnect new phone</li>
+                            <li>10. Open <strong>HD SMTH</strong> on new phone</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div id="es" class="content-section">
+
+                <p class="alert alert-primary">Al configurar un teléfono nuevo, la mayoría de las personas utiliza una
+                    herramienta de migración de datos. ¿Cómo transferir los archivos ocultos de HD SMTH?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Si aún no has usado la herramienta de migración del
+                    teléfono</h2>
+                <p>Las herramientas estándar de transferencia normalmente no migran archivos ocultos. Para asegurarte de
+                    que tus fotos y videos ocultos se transfieran al nuevo teléfono, sigue estos pasos:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Antes</strong> de usar la herramienta de migración de tu teléfono:</li>
+                            <li><strong>Desoculta</strong> todos los archivos usando <strong>HD SMTH</strong> en tu
+                                <strong>teléfono antiguo</strong></li>
+                            <li>2. Luego usa la herramienta de migración de tu teléfono</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Razón:</strong> Las herramientas de migración solo transfieren fotos y videos
+                            <strong>visibles</strong>, no datos ocultos.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Si ya usaste la herramienta de migración del
+                    teléfono</h2>
+
+                <p>Si ya usaste la herramienta de migración sin restaurar primero los archivos ocultos, no encontrarás
+                    los archivos ocultos en el nuevo teléfono.</p>
+                <p>Hay dos opciones para transferirlos.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Método simple (solo para teléfonos)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. En el <strong>teléfono antiguo</strong>: Abre <strong>HD SMTH</strong> → Desoculta
+                                todos los archivos</li>
+                            <li>2. En <strong>ambos teléfonos</strong>: Instala y abre la aplicación <strong>Local
+                                    Send</strong> (Google Play Store)</li>
+                            <li>3. En el <strong>teléfono antiguo</strong>: Selecciona los archivos desocultos en
+                                <strong>Local Send</strong> → Enviar</li>
+                            <li>4. En el <strong>nuevo teléfono</strong>: Acepta los archivos en <strong>Local
+                                    Send</strong></li>
+                            <li>5. Después de la transferencia: Abre <strong>HD SMTH</strong> en el nuevo teléfono →
+                                Oculta esos archivos</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Método rápido (requiere una PC con Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Conecta el <strong>teléfono antiguo</strong> a la PC mediante un cable USB</li>
+                            <li>2. Selecciona el modo <strong>"Transferencia de archivos"</strong> en el teléfono</li>
+                            <li>3. En la PC: Abre el <strong>Explorador de archivos → Este equipo</strong></li>
+                            <li>4. Copia la carpeta <strong>.pg</strong> del directorio raíz del teléfono a la PC</li>
+                            <li>5. Desconecta el teléfono antiguo</li>
+                            <li>6. Conecta el <strong>nuevo teléfono</strong> a la PC</li>
+                            <li>7. Selecciona el modo <strong>"Transferencia de archivos"</strong></li>
+                            <li>8. Pega la carpeta <strong>.pg</strong> en el directorio raíz del nuevo teléfono</li>
+                            <li>9. Desconecta el nuevo teléfono</li>
+                            <li>10. Abre <strong>HD SMTH</strong> en el nuevo teléfono</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="pt" class="content-section">
+
+                <p class="alert alert-primary">Ao configurar um telefone novo, a maioria das pessoas usa uma ferramenta
+                    de migração de dados. Como transferir os arquivos ocultos do HD SMTH?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Se você ainda não usou a ferramenta de migração do
+                    telefone</h2>
+                <p>As ferramentas padrão de transferência geralmente não migram arquivos ocultos. Para garantir que suas
+                    fotos e vídeos ocultos sejam transferidos para o novo telefone, siga estas etapas:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Antes</strong> de usar a ferramenta de migração do seu telefone:</li>
+                            <li><strong>Desoculte</strong> todos os arquivos usando <strong>HD SMTH</strong> no seu
+                                <strong>telefone antigo</strong></li>
+                            <li>2. Em seguida, use a ferramenta de migração do seu telefone</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Motivo:</strong> As ferramentas de migração transferem apenas fotos e vídeos
+                            <strong>visíveis</strong>, não dados ocultos.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Se você já usou a ferramenta de migração do telefone
+                </h2>
+
+                <p>Se você já usou a ferramenta de migração sem restaurar os arquivos ocultos primeiro, não encontrará
+                    os arquivos ocultos no novo telefone.</p>
+                <p>Há duas opções para transferi-los.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Método simples (apenas para telefones)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. No <strong>telefone antigo</strong>: Abra <strong>HD SMTH</strong> → Desoculte todos
+                                os arquivos</li>
+                            <li>2. Em <strong>ambos os telefones</strong>: Instale e abra o aplicativo <strong>Local
+                                    Send</strong> (Google Play Store)</li>
+                            <li>3. No <strong>telefone antigo</strong>: Selecione os arquivos desocultos no
+                                <strong>Local Send</strong> → Enviar</li>
+                            <li>4. No <strong>novo telefone</strong>: Aceite os arquivos no <strong>Local Send</strong>
+                            </li>
+                            <li>5. Após a transferência: Abra <strong>HD SMTH</strong> no novo telefone → Oculte esses
+                                arquivos</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Método rápido (requer um PC com Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Conecte o <strong>telefone antigo</strong> ao PC via cabo USB</li>
+                            <li>2. Selecione o modo <strong>"Transferência de arquivos"</strong> no telefone</li>
+                            <li>3. No PC: Abra o <strong>Explorador de Arquivos → Este Computador</strong></li>
+                            <li>4. Copie a pasta <strong>.pg</strong> do diretório raiz do telefone para o PC</li>
+                            <li>5. Desconecte o telefone antigo</li>
+                            <li>6. Conecte o <strong>novo telefone</strong> ao PC</li>
+                            <li>7. Selecione o modo <strong>"Transferência de arquivos"</strong></li>
+                            <li>8. Cole a pasta <strong>.pg</strong> no diretório raiz do novo telefone</li>
+                            <li>9. Desconecte o novo telefone</li>
+                            <li>10. Abra <strong>HD SMTH</strong> no novo telefone</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="fr" class="content-section">
+
+                <p class="alert alert-primary">Lors de la configuration d'un nouveau téléphone, la plupart des gens
+                    utilisent un outil de migration de données. Comment transférer les fichiers cachés de HD SMTH ?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Si vous n'avez pas encore utilisé l'outil de
+                    migration du téléphone</h2>
+                <p>Les outils de transfert standard ne migrent généralement pas les fichiers cachés. Pour vous assurer
+                    que vos photos et vidéos cachées sont transférées vers votre nouveau téléphone, suivez ces étapes :
+                </p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Avant</strong> d'utiliser l'outil de migration de votre téléphone :</li>
+                            <li><strong>Dévoilez</strong> tous les fichiers en utilisant <strong>HD SMTH</strong> sur
+                                votre <strong>ancien téléphone</strong></li>
+                            <li>2. Ensuite, utilisez l'outil de migration de votre téléphone</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Raison :</strong> Les outils de migration ne transfèrent que les photos et vidéos
+                            <strong>visibles</strong>, pas les données cachées.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Si vous avez déjà utilisé l'outil de migration du
+                    téléphone</h2>
+
+                <p>Si vous avez déjà utilisé l'outil de migration sans restaurer d'abord les fichiers cachés, vous ne
+                    trouverez pas les fichiers cachés sur le nouveau téléphone.</p>
+                <p>Il existe deux options pour les transférer.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Méthode simple (pour téléphones uniquement)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Sur l'<strong>ancien téléphone</strong> : Ouvrez <strong>HD SMTH</strong> → Dévoilez
+                                tous les fichiers</li>
+                            <li>2. Sur <strong>les deux téléphones</strong> : Installez et ouvrez l'application
+                                <strong>Local Send</strong> (Google Play Store)</li>
+                            <li>3. Sur l'<strong>ancien téléphone</strong> : Sélectionnez les fichiers dévoilés dans
+                                <strong>Local Send</strong> → Envoyer</li>
+                            <li>4. Sur le <strong>nouveau téléphone</strong> : Acceptez les fichiers dans <strong>Local
+                                    Send</strong></li>
+                            <li>5. Après le transfert : Ouvrez <strong>HD SMTH</strong> sur le nouveau téléphone →
+                                Masquez ces fichiers</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Méthode rapide (nécessite un PC Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Connectez l'<strong>ancien téléphone</strong> au PC via un câble USB</li>
+                            <li>2. Sélectionnez le mode <strong>"Transfert de fichiers"</strong> sur le téléphone</li>
+                            <li>3. Sur le PC : Ouvrez <strong>l'Explorateur de fichiers → Ce PC</strong></li>
+                            <li>4. Copiez le dossier <strong>.pg</strong> du répertoire racine du téléphone vers le PC
+                            </li>
+                            <li>5. Déconnectez l'ancien téléphone</li>
+                            <li>6. Connectez le <strong>nouveau téléphone</strong> au PC</li>
+                            <li>7. Sélectionnez le mode <strong>"Transfert de fichiers"</strong></li>
+                            <li>8. Collez le dossier <strong>.pg</strong> dans le répertoire racine du nouveau téléphone
+                            </li>
+                            <li>9. Déconnectez le nouveau téléphone</li>
+                            <li>10. Ouvrez <strong>HD SMTH</strong> sur le nouveau téléphone</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="ar" class="content-section">
+
+                <p class="alert alert-primary">عند إعداد هاتف جديد، يستخدم معظم الأشخاص أداة نقل البيانات. كيف تنقل
+                    الملفات المخفية من HD SMTH؟</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">إذا لم تكن قد استخدمت أداة نقل الهاتف بعد</h2>
+                <p>عادةً ما لا تنقل أدوات النقل القياسية الملفات المخفية. لضمان نقل صورك ومقاطع الفيديو المخفية إلى
+                    هاتفك الجديد، اتبع هذه الخطوات:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>قبل</strong> استخدام أداة نقل الهاتف:</li>
+                            <li><strong>أظهر</strong> جميع الملفات باستخدام <strong>HD SMTH</strong> على <strong>هاتفك
+                                    القديم</strong></li>
+                            <li>2. ثم استخدم أداة نقل الهاتف</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>السبب:</strong> تنقل أدوات النقل فقط الصور ومقاطع الفيديو <strong>المرئية</strong>،
+                            وليس البيانات المخفية.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">إذا كنت قد استخدمت أداة نقل الهاتف بالفعل</h2>
+
+                <p>إذا كنت قد استخدمت أداة النقل دون استعادة الملفات المخفية أولاً، فلن تجد الملفات المخفية على الهاتف
+                    الجديد.</p>
+                <p>هناك خياران لنقلها.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        طريقة بسيطة (للأجهزة فقط)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. على <strong>الهاتف القديم</strong>: افتح <strong>HD SMTH</strong> → أظهر جميع الملفات
+                            </li>
+                            <li>2. على <strong>كلا الهاتفين</strong>: قم بتثبيت وتشغيل تطبيق <strong>Local Send</strong>
+                                (متجر Google Play)</li>
+                            <li>3. على <strong>الهاتف القديم</strong>: حدد الملفات غير المخفية في <strong>Local
+                                    Send</strong> → إرسال</li>
+                            <li>4. على <strong>الهاتف الجديد</strong>: قبول الملفات في <strong>Local Send</strong></li>
+                            <li>5. بعد النقل: افتح <strong>HD SMTH</strong> على الهاتف الجديد → أخفِ تلك الملفات</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        طريقة سريعة (تتطلب جهاز كمبيوتر يعمل بنظام Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. قم بتوصيل <strong>الهاتف القديم</strong> بالكمبيوتر عبر كابل USB</li>
+                            <li>2. حدد وضع <strong>"نقل الملفات"</strong> على الهاتف</li>
+                            <li>3. على الكمبيوتر: افتح <strong>File Explorer → This PC</strong></li>
+                            <li>4. انسخ مجلد <strong>.pg</strong> من الدليل الرئيسي للهاتف إلى الكمبيوتر</li>
+                            <li>5. افصل الهاتف القديم</li>
+                            <li>6. قم بتوصيل <strong>الهاتف الجديد</strong> بالكمبيوتر</li>
+                            <li>7. حدد وضع <strong>"نقل الملفات"</strong></li>
+                            <li>8. الصق مجلد <strong>.pg</strong> في الدليل الرئيسي للهاتف الجديد</li>
+                            <li>9. افصل الهاتف الجديد</li>
+                            <li>10. افتح <strong>HD SMTH</strong> على الهاتف الجديد</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="tr" class="content-section">
+
+                <p class="alert alert-primary">Yeni bir telefon kurarken, çoğu kişi bir veri aktarma aracı kullanır. HD
+                    SMTH'den gizli dosyaları nasıl aktarırsınız?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Telefonun Aktarma Aracını Henüz Kullanmadıysanız
+                </h2>
+                <p>Standart aktarma araçları genellikle gizli dosyaları taşımaz. Gizli fotoğraf ve videolarınızın yeni
+                    telefona aktarılmasını sağlamak için şu adımları izleyin:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. Telefonunuzun aktarma aracını <strong>kullanmadan önce</strong>:</li>
+                            <li><strong>Eski telefonunuzda</strong> <strong>HD SMTH</strong> kullanarak tüm dosyaları
+                                <strong>görünür yapın</strong></li>
+                            <li>2. Ardından telefonunuzun aktarma aracını kullanın</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Sebep:</strong> Aktarma araçları yalnızca <strong>görünür</strong> fotoğraf ve
+                            videoları aktarır, gizli verileri değil.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Telefonun Aktarma Aracını Zaten Kullandıysanız</h2>
+
+                <p>Eğer gizli dosyaları geri yüklemeden önce aktarma aracını kullandıysanız, yeni telefonda gizli
+                    dosyaları bulamazsınız.</p>
+                <p>Onları aktarmak için iki seçenek vardır.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Basit Yöntem (Yalnızca Telefonlar)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>Eski telefonda</strong>: <strong>HD SMTH</strong>'yi açın → Tüm dosyaları
+                                görünür yapın</li>
+                            <li>2. <strong>Her iki telefonda</strong>: <strong>Local Send</strong> uygulamasını yükleyin
+                                ve açın (Google Play Store)</li>
+                            <li>3. <strong>Eski telefonda</strong>: <strong>Local Send</strong>'de görünür yapılan
+                                dosyaları seçin → Gönder</li>
+                            <li>4. <strong>Yeni telefonda</strong>: <strong>Local Send</strong>'de dosyaları kabul edin
+                            </li>
+                            <li>5. Aktarımdan sonra: Yeni telefonda <strong>HD SMTH</strong>'yi açın → Bu dosyaları
+                                gizleyin</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Hızlı Yöntem (Windows PC Gerektirir)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>Eski telefonu</strong> USB kablosuyla bilgisayara bağlayın</li>
+                            <li>2. Telefonda <strong>"Dosya Aktarımı"</strong> modunu seçin</li>
+                            <li>3. Bilgisayarda: <strong>Dosya Gezgini → Bu Bilgisayar</strong>'ı açın</li>
+                            <li>4. Telefonun kök dizinindeki <strong>.pg klasörünü</strong> bilgisayara kopyalayın</li>
+                            <li>5. Eski telefonun bağlantısını kesin</li>
+                            <li>6. <strong>Yeni telefonu</strong> bilgisayara bağlayın</li>
+                            <li>7. <strong>"Dosya Aktarımı"</strong> modunu seçin</li>
+                            <li>8. <strong>.pg klasörünü</strong> yeni telefonun kök dizinine yapıştırın</li>
+                            <li>9. Yeni telefonun bağlantısını kesin</li>
+                            <li>10. Yeni telefonda <strong>HD SMTH</strong>'yi açın</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="ru" class="content-section">
+
+                <p class="alert alert-primary">При настройке нового телефона большинство людей используют инструмент
+                    переноса данных. Как перенести скрытые файлы из HD SMTH?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Если вы еще не использовали инструмент переноса
+                    телефона</h2>
+                <p>Стандартные инструменты переноса обычно не переносят скрытые файлы. Чтобы ваши скрытые фото и видео
+                    были перенесены на новый телефон, выполните следующие действия:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Перед</strong> использованием инструмента переноса телефона:</li>
+                            <li><strong>Откройте</strong> все файлы с помощью <strong>HD SMTH</strong> на <strong>старом
+                                    телефоне</strong></li>
+                            <li>2. Затем используйте инструмент переноса телефона</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Причина:</strong> Инструменты переноса переносят только <strong>видимые</strong>
+                            фото и видео, а не скрытые данные.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Если вы уже использовали инструмент переноса
+                    телефона</h2>
+
+                <p>Если вы уже использовали инструмент переноса, не восстановив сначала скрытые файлы, вы не найдете их
+                    на новом телефоне.</p>
+                <p>Есть два варианта их переноса.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Простой способ (только для телефонов)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. На <strong>старом телефоне</strong>: Откройте <strong>HD SMTH</strong> → Откройте все
+                                файлы</li>
+                            <li>2. На <strong>обоих телефонах</strong>: Установите и откройте приложение <strong>Local
+                                    Send</strong> (Google Play Маркет)</li>
+                            <li>3. На <strong>старом телефоне</strong>: Выберите открытые файлы в <strong>Local
+                                    Send</strong> → Отправить</li>
+                            <li>4. На <strong>новом телефоне</strong>: Примите файлы в <strong>Local Send</strong></li>
+                            <li>5. После переноса: Откройте <strong>HD SMTH</strong> на новом телефоне → Скрыть эти
+                                файлы</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Быстрый способ (требуется ПК с Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Подключите <strong>старый телефон</strong> к ПК через USB-кабель</li>
+                            <li>2. Выберите режим <strong>"Передача файлов"</strong> на телефоне</li>
+                            <li>3. На ПК: Откройте <strong>Проводник → Этот компьютер</strong></li>
+                            <li>4. Скопируйте папку <strong>.pg</strong> из корневого каталога телефона на ПК</li>
+                            <li>5. Отключите старый телефон</li>
+                            <li>6. Подключите <strong>новый телефон</strong> к ПК</li>
+                            <li>7. Выберите режим <strong>"Передача файлов"</strong></li>
+                            <li>8. Вставьте папку <strong>.pg</strong> в корневой каталог нового телефона</li>
+                            <li>9. Отключите новый телефон</li>
+                            <li>10. Откройте <strong>HD SMTH</strong> на новом телефоне</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="kr" class="content-section">
+
+                <p class="alert alert-primary">새 휴대폰을 설정할 때 대부분의 사람들은 데이터 마이그레이션 도구를 사용합니다. HD SMTH의 숨겨진 파일은 어떻게 전송하나요?
+                </p>
+
+                <h2 class="section-title" style="margin-top: 30px;">휴대폰 마이그레이션 도구를 아직 사용하지 않은 경우</h2>
+                <p>표준 전송 도구는 일반적으로 숨겨진 파일을 옮기지 않습니다. 숨겨진 사진과 동영상을 새 휴대폰으로 전송하려면 다음 단계를 따르세요:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. 휴대폰 마이그레이션 도구를 사용하기 <strong>전에</strong>:</li>
+                            <li><strong>구형 휴대폰</strong>에서 <strong>HD SMTH</strong>를 사용하여 모든 파일을 <strong>숨김
+                                    해제</strong>하세요</li>
+                            <li>2. 그런 다음 휴대폰 마이그레이션 도구를 사용하세요</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>이유:</strong> 마이그레이션 도구는 <strong>보이는</strong> 사진과 동영상만 전송하며, 숨겨진 데이터는 전송하지 않습니다.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">이미 휴대폰 마이그레이션 도구를 사용한 경우</h2>
+
+                <p>이미 마이그레이션 도구를 사용했지만 숨겨진 파일을 먼저 복원하지 않은 경우, 새 휴대폰에서 숨겨진 파일을 찾을 수 없습니다.</p>
+                <p>이를 전송하는 두 가지 방법이 있습니다.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        간단한 방법 (휴대폰 전용)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>구형 휴대폰</strong>에서: <strong>HD SMTH</strong> 열기 → 모든 파일 숨김 해제</li>
+                            <li>2. <strong>양쪽 휴대폰</strong>에: <strong>Local Send</strong> 앱 설치 및 실행 (Google Play 스토어)
+                            </li>
+                            <li>3. <strong>구형 휴대폰</strong>에서: <strong>Local Send</strong>에서 숨김 해제된 파일 선택 → 전송</li>
+                            <li>4. <strong>새 휴대폰</strong>에서: <strong>Local Send</strong>에서 파일 수락</li>
+                            <li>5. 전송 후: 새 휴대폰에서 <strong>HD SMTH</strong> 열기 → 해당 파일 숨기기</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        빠른 방법 (Windows PC 필요)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>구형 휴대폰</strong>을 USB 케이블로 PC에 연결</li>
+                            <li>2. 휴대폰에서 <strong>"파일 전송"</strong> 모드 선택</li>
+                            <li>3. PC에서: <strong>파일 탐색기 → 내 PC</strong> 열기</li>
+                            <li>4. 휴대폰의 루트 디렉토리에서 <strong>.pg 폴더</strong>를 PC로 복사</li>
+                            <li>5. 구형 휴대폰 연결 해제</li>
+                            <li>6. <strong>새 휴대폰</strong>을 PC에 연결</li>
+                            <li>7. <strong>"파일 전송"</strong> 모드 선택</li>
+                            <li>8. <strong>.pg 폴더</strong>를 새 휴대폰의 루트 디렉토리에 붙여넣기</li>
+                            <li>9. 새 휴대폰 연결 해제</li>
+                            <li>10. 새 휴대폰에서 <strong>HD SMTH</strong> 열기</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="ja" class="content-section">
+
+                <p class="alert alert-primary">新しいスマートフォンを設定する際、ほとんどの人はデータ移行ツールを使用します。HD SMTHの隠しファイルはどのように転送しますか？</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">スマートフォンの移行ツールをまだ使用していない場合</h2>
+                <p>標準的な転送ツールは通常、隠しファイルを移行しません。隠し写真や動画を新しいスマートフォンに転送するには、次の手順に従ってください:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. スマートフォンの移行ツールを使用する<strong>前に</strong>:</li>
+                            <li><strong>旧スマートフォン</strong>で<strong>HD SMTH</strong>を使用してすべてのファイルを<strong>表示</strong>に設定
+                            </li>
+                            <li>2. その後、スマートフォンの移行ツールを使用</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>理由:</strong> 移行ツールは<strong>表示可能な</strong>写真や動画のみを転送し、隠しデータは転送しません。
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">すでにスマートフォンの移行ツールを使用した場合</h2>
+
+                <p>すでに移行ツールを使用し、隠しファイルを最初に復元しなかった場合、新しいスマートフォンで隠しファイルを見つけることができません。</p>
+                <p>それらを転送するには2つの方法があります。</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        簡単な方法（スマートフォンのみ）
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>旧スマートフォン</strong>で: <strong>HD SMTH</strong>を開く → すべてのファイルを表示に設定</li>
+                            <li>2. <strong>両方のスマートフォン</strong>に: <strong>Local Send</strong>アプリをインストールして開く（Google
+                                Playストア）</li>
+                            <li>3. <strong>旧スマートフォン</strong>で: <strong>Local Send</strong>で表示に設定したファイルを選択 → 送信</li>
+                            <li>4. <strong>新しいスマートフォン</strong>で: <strong>Local Send</strong>でファイルを受信</li>
+                            <li>5. 転送後: 新しいスマートフォンで<strong>HD SMTH</strong>を開く → それらのファイルを非表示に設定</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        高速な方法（Windows PCが必要）
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. <strong>旧スマートフォン</strong>をUSBケーブルでPCに接続</li>
+                            <li>2. スマートフォンで<strong>"ファイル転送"</strong>モードを選択</li>
+                            <li>3. PCで: <strong>ファイルエクスプローラー → このPC</strong>を開く</li>
+                            <li>4. スマートフォンのルートディレクトリから<strong>.pgフォルダ</strong>をPCにコピー</li>
+                            <li>5. 旧スマートフォンを切断</li>
+                            <li>6. <strong>新しいスマートフォン</strong>をPCに接続</li>
+                            <li>7. <strong>"ファイル転送"</strong>モードを選択</li>
+                            <li>8. <strong>.pgフォルダ</strong>を新しいスマートフォンのルートディレクトリに貼り付け</li>
+                            <li>9. 新しいスマートフォンを切断</li>
+                            <li>10. 新しいスマートフォンで<strong>HD SMTH</strong>を開く</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="it" class="content-section">
+
+                <p class="alert alert-primary">Quando si configura un nuovo telefono, la maggior parte delle persone
+                    utilizza uno strumento di migrazione dei dati. Come si trasferiscono i file nascosti da HD SMTH?</p>
+
+                <h2 class="section-title" style="margin-top: 30px;">Se Non Hai Ancora Utilizzato lo Strumento di
+                    Migrazione del Telefono</h2>
+                <p>Gli strumenti di trasferimento standard in genere non migrano i file nascosti. Per assicurarti che le
+                    tue foto e video nascosti vengano trasferiti sul nuovo telefono, segui questi passaggi:</p>
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ul>
+                            <li>1. <strong>Prima</strong> di utilizzare lo strumento di migrazione del telefono:</li>
+                            <li><strong>Rendi visibili</strong> tutti i file utilizzando <strong>HD SMTH</strong> sul
+                                tuo <strong>vecchio telefono</strong></li>
+                            <li>2. Poi utilizza lo strumento di migrazione del telefono</li>
+                        </ul>
+                        <div class="alert alert-info" style="padding: 6px;margin-top: 6px;">
+                            <strong>Motivo:</strong> Gli strumenti di migrazione trasferiscono solo foto e video
+                            <strong>visibili</strong>, non i dati nascosti.
+                        </div>
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 30px;">Se Hai Già Utilizzato lo Strumento di Migrazione del
+                    Telefono</h2>
+
+                <p>Se hai già utilizzato lo strumento di migrazione senza prima ripristinare i file nascosti, non
+                    troverai i file nascosti sul nuovo telefono.</p>
+                <p>Ci sono due opzioni per trasferirli.</p>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Metodo Semplice (Solo Telefoni)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Sul <strong>vecchio telefono</strong>: Apri <strong>HD SMTH</strong> → Rendi visibili
+                                tutti i file</li>
+                            <li>2. Su <strong>entrambi i telefoni</strong>: Installa e apri l'app <strong>Local
+                                    Send</strong> (Google Play Store)</li>
+                            <li>3. Sul <strong>vecchio telefono</strong>: Seleziona i file resi visibili in
+                                <strong>Local Send</strong> → Invia</li>
+                            <li>4. Sul <strong>nuovo telefono</strong>: Accetta i file in <strong>Local Send</strong>
+                            </li>
+                            <li>5. Dopo il trasferimento: Apri <strong>HD SMTH</strong> sul nuovo telefono → Nascondi
+                                quei file</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top: 20px;">
+                    <div class="card-header text-light bg-secondary">
+                        Metodo Veloce (Richiede un PC Windows)
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                        <ol>
+                            <li>1. Collega il <strong>vecchio telefono</strong> al PC tramite cavo USB</li>
+                            <li>2. Seleziona la modalità <strong>"Trasferimento file"</strong> sul telefono</li>
+                            <li>3. Sul PC: Apri <strong>Esplora file → Questo PC</strong></li>
+                            <li>4. Copia la cartella <strong>.pg</strong> dalla directory root del telefono al PC</li>
+                            <li>5. Disconnetti il vecchio telefono</li>
+                            <li>6. Collega il <strong>nuovo telefono</strong> al PC</li>
+                            <li>7. Seleziona la modalità <strong>"Trasferimento file"</strong></li>
+                            <li>8. Incolla la cartella <strong>.pg</strong> nella directory root del nuovo telefono</li>
+                            <li>9. Disconnetti il nuovo telefono</li>
+                            <li>10. Apri <strong>HD SMTH</strong> sul nuovo telefono</li>
+                        </ol>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="help-nav">
+                <a href="#en" id="nav-en">English</a>
+                <a href="#es" id="nav-es">Español</a>
+                <a href="#pt" id="nav-pt">Português</a>
+                <a href="#fr" id="nav-fr">Français</a>
+                <a href="#ar" id="nav-ar">العربية</a>
+                <a href="#tr" id="nav-tr">Türkçe</a>
+                <a href="#ru" id="nav-ru">Русский</a>
+                <a href="#kr" id="nav-kr">한국어</a>
+                <a href="#ja" id="nav-ja">日本語</a>
+                <a href="#it" id="nav-it">Italiano</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section Start -->
+    <!-- <footer id="footer" class="footer-area section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="footer-logo mb-3">
+                        <img src="assets/img/logo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.4s">
+                    <h3 class="footer-titel">公司</h3>
+                    <ul>
+                        <li><a href="#">新闻稿</a></li>
+                        <li><a href="#">使命</a></li>
+                        <li><a href="#">战略</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.6s">
+                    <h3 class="footer-titel">关于</h3>
+                    <ul>
+                        <li><a href="#">招聘</a></li>
+                        <li><a href="#">团队</a></li>
+                        <li><a href="#">客户</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12 wow fadeInUp" data-wow-delay="0.8s">
+                    <h3 class="footer-titel">关注我们</h3>
+                    <div class="social-icon">
+                        <a class="facebook" href="#"><i class="lni-facebook-filled"></i></a>
+                        <a class="twitter" href="#"><i class="lni-twitter-filled"></i></a>
+                        <a class="instagram" href="#"><i class="lni-instagram-filled"></i></a>
+                        <a class="linkedin" href="#"><i class="lni-linkedin-filled"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer> -->
+    <!-- Footer Section End -->
+
+    <section id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Copyright © 2025 Colifer Lab All Right Reserved</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Go to Top Link -->
+    <a href="#" class="back-to-top">
+        <i class="lni-arrow-up"></i>
+    </a>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader" id="loader-1"></div>
+    </div>
+    <!-- End Preloader -->
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="assets/js/jquery-min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/owl.carousel.min.js"></script>
+    <script src="assets/js/slick.min.js"></script>
+    <script src="assets/js/wow.js"></script>
+    <script src="assets/js/jquery.nav.js"></script>
+    <script src="assets/js/scrolling-nav.js"></script>
+    <script src="assets/js/jquery.easing.min.js"></script>
+    <script src="assets/js/jquery.slicknav.js"></script>
+    <script src="assets/js/main.js"></script>
+
+    <script>
+        function showSectionFromHash() {
+            const hash = location.hash.substring(1);
+            const sections = document.querySelectorAll('.content-section');
+            const navs = document.querySelectorAll('.help-nav a');
+            let found = false;
+            sections.forEach(section => {
+                if (section.id === hash) {
+                    section.classList.add('active');
+                    found = true;
+                } else {
+                    section.classList.remove('active');
+                }
+            });
+            navs.forEach(nav => {
+                if (nav.getAttribute('href') === '#' + hash) {
+                    nav.classList.add('active');
+                } else {
+                    nav.classList.remove('active');
+                }
+            });
+            // 如果 hash 不存在或不匹配任何 section，默认显示第一个
+            if (!found) {
+                if (sections.length > 0) sections[0].classList.add('active');
+                if (navs.length > 0) navs[0].classList.add('active');
+            }
+        }
+        window.addEventListener('load', showSectionFromHash);
+        window.addEventListener('hashchange', showSectionFromHash);
+    </script>
+
+</body>
+
+</html>
