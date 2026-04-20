@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting to Device...</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f5;
+            color: #18181b;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            max-width: 400px;
+            width: 90%;
+        }
+        h2 { margin-top: 0; font-size: 1.25rem; font-weight: 600; }
+        p { color: #71717a; font-size: 0.9rem; margin-bottom: 0; }
+        .error-text { color: #ef4444; }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const path = window.location.pathname.replace(/^\/+/, '');
+            const ipSuffixRegex = /^\d+(\.\d+)*$/;
+
+            const titleEl = document.getElementById('status-title');
+            const descEl = document.getElementById('status-desc');
+
+            if (ipSuffixRegex.test(path)) {
+                const targetUrl = `http://192.168.${path}:9999`;
+                window.location.replace(targetUrl);
+            } else {
+                titleEl.textContent = "404 Not Found";
+                titleEl.classList.add("error-text");
+                descEl.textContent = "Invalid link. Please verify the short code displayed on your app.";
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2 id="status-title">Connecting to your device...</h2>
+        <p id="status-desc">Please ensure both devices are connected to the same Wi-Fi network.</p>
+    </div>
+</body>
+</html>
