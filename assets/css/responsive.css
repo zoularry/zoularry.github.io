@@ -79,72 +79,68 @@
 /* mobile or only mobile */
 @media (max-width: 767px) {
   .section-padding {
-    padding: 50px 0;
+    padding: 80px 0;
   }
   .section-title {
-    font-size: 22px;
-    margin-bottom: 30px;
+    font-size: 28px;
+    margin-bottom: 40px;
+    font-weight: 700;
+    color: #1a1a1a;
   }
   .title-hl {
-    font-size: 22px;
+    font-size: 24px;
   }
   .navbar-brand img {
-    margin: 5px 0;
+    margin: 8px 0;
+    max-height: 40px;
   }
   #hero-area .contents {
-    padding: 100px 0px 60px 0px;
+    padding: 120px 0px 80px 0px;
   }
   #hero-area .contents .head-title {
-    font-size: 20px;
-    line-height: 36px;
-    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    font-weight: 700;
   }
   #hero-area .contents p {
-    font-size: 18px;
+    font-size: 16px;
+    line-height: 1.6;
   }
   #hero-area .contents .btn {
-    margin: 5px 10px 10px 0px;
+    margin: 10px 0;
+    padding: 14px 32px;
+    width: 100%;
+    display: block;
+    font-size: 16px;
   }
-  .text-wrapper {
-    padding: 60px 15px;
+  .services-item {
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   }
-  #about .sec-title h3 {
-    font-size: 22px;
-    line-height: 36px;
-  }
-  .why .content h3 {
+  .services-item .services-content h3 a {
     font-size: 18px;
   }
-  .testimonial-item {
-    padding: 0;
-  }
-  .client-item-wrapper img {
-    width: 70%;
-  }
-  .slick-slider {
-    padding: 0;
-  }
-  .slider-center img {
-    padding: 60px 40px;
-  }
-  .subscribes h4 {
-    font-size: 22px;
-  }
-  .subscribes p {
-    font-size: 16px;
-    line-height: 28px;
-  }
-  .footer-right-contact .single-contact {
-    margin: 10px 7px;
-    padding: 3px 45px;
-  }
   .footer-area .footer-titel {
-    margin-top: 30px;
+    margin-top: 40px;
+    font-size: 18px;
   }
-  .contact-right-area {
-    margin: 20px 0;
+  /* Tap Target Optimization for Android */
+  .navbar-nav .nav-link, 
+  .mobile-menu li a,
+  .footer-area ul li a {
+    padding: 12px 0;
+    display: block;
+    min-height: 48px;
+    line-height: 24px;
   }
-  .contact-form-area h2 {
-    font-size: 14px;
+  .social-icon a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 20px;
+    margin: 10px 8px;
   }
 }
