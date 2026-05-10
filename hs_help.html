@@ -241,23 +241,100 @@
             animation: spin 1s linear infinite;
         }
 
-        .lang-switcher {
+        /* --- Language Dropdown --- */
+        .lang-container {
             position: absolute;
-            top: 1rem;
+            top: 1.5rem;
             right: 1.5rem;
-            font-size: 0.9rem;
-            z-index: 100;
+            z-index: 1000;
         }
 
-        .lang-switcher a {
+        .lang-selector {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .lang-selector:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--accent-teal);
+        }
+
+        .lang-selector::after {
+            content: '▾';
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .lang-container.open .lang-selector::after {
+            transform: rotate(180deg);
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            right: 0;
+            background: rgba(15, 50, 45, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            width: 180px;
+            padding: 0.5rem;
+            display: none;
+            flex-direction: column;
+            gap: 2px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lang-container.open .lang-dropdown {
+            display: flex;
+        }
+
+        .lang-dropdown a {
             color: var(--text-muted);
             text-decoration: none;
-            padding: 0.2rem 0.5rem;
-            transition: color 0.3s;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .lang-switcher a:hover, .lang-switcher a.active {
+        .lang-dropdown a:hover {
+            background: rgba(32, 201, 151, 0.1);
             color: var(--accent-teal);
+        }
+
+        .lang-dropdown a.active {
+            color: var(--accent-teal);
+            font-weight: 600;
+            background: rgba(32, 201, 151, 0.15);
+        }
+
+        .lang-dropdown a.active::after {
+            content: '✓';
+            font-size: 0.8rem;
         }
 
         @keyframes spin {
@@ -273,8 +350,9 @@
 <body>
 
     <header>
-        <div class="lang-switcher">
-            <a href="?lang=en" id="btn-en">EN</a> | <a href="?lang=zh" id="btn-zh">中文</a>
+        <div class="lang-container" id="lang-container">
+            <div class="lang-selector" id="lang-selector">Loading...</div>
+            <div class="lang-dropdown" id="lang-dropdown"></div>
         </div>
         <div class="logo-container">
             <img src="assets/img/hdsmth_logo.webp" alt="Hide Something Logo" onerror="this.src='https://raw.githubusercontent.com/zoularry/zoularry.github.io/master/assets/img/hdsmth_logo.webp'">
@@ -308,25 +386,84 @@
             const searchInput = document.getElementById('search-input');
             const titleEl = document.getElementById('main-title');
             const subtitleEl = document.getElementById('main-subtitle');
+            const langContainer = document.getElementById('lang-container');
+            const langSelector = document.getElementById('lang-selector');
+            const langDropdown = document.getElementById('lang-dropdown');
+            
+            const languages = {
+                'en': 'English',
+                'zh': '中文',
+                'ar': 'العربية',
+                'da': 'Dansk',
+                'de': 'Deutsch',
+                'es': 'Español',
+                'fr': 'Français',
+                'hi': 'हिन्दी',
+                'it': 'Italiano',
+                'ja': '日本語',
+                'ko': '한국어',
+                'nl': 'Nederlands',
+                'pt': 'Português',
+                'ru': 'Русский',
+                'tr': 'Türkçe',
+                'vi': 'Tiếng Việt'
+            };
+
+            const uiStrings = {
+                'en': { title: "Help Center", subtitle: "Keep your personal life \"truly personal\" — Hide Something is here to protect your privacy.", search: "Search for answers...", loading: "Loading documentation..." },
+                'zh': { title: "帮助中心", subtitle: "让个人生活“真正私密” —— Hide Something 致力于保护您的隐私。", search: "搜索问题...", loading: "正在加载文档..." },
+                'ar': { title: "مركز المساعدة", subtitle: "اجعل حياتك الشخصية \"شخصية حقًا\" - Hide Something هنا لحماية خصوصيتك.", search: "بحث عن إجابات...", loading: "جاري تحميل المستندات..." },
+                'da': { title: "Hjælpecenter", subtitle: "Hold dit personlige liv \"virkelig personligt\" — Hide Something er her for at beskytte dit privatliv.", search: "Søg efter svar...", loading: "Indlæser dokumentation..." },
+                'de': { title: "Hilfe-Center", subtitle: "Halten Sie Ihr Privatleben „wirklich privat“ – Hide Something ist hier, um Ihre Privatsphäre zu schützen.", search: "Nach Antworten suchen...", loading: "Dokumentation wird geladen..." },
+                'es': { title: "Centro de Ayuda", subtitle: "Mantenga su vida personal \"realmente personal\": Hide Something está aquí para proteger su privacidad.", search: "Buscar respuestas...", loading: "Cargando documentación..." },
+                'fr': { title: "Centre d'Aide", subtitle: "Gardez votre vie privée \"vraiment privée\" — Hide Something est là pour protéger votre confidentialité.", search: "Rechercher des réponses...", loading: "Chargement de la documentation..." },
+                'hi': { title: "सहायता केंद्र", subtitle: "अपने निजी जीवन को \"वास्तव में निजी\" रखें — Hide Something आपकी गोपनीयता की रक्षा के लिए यहां है।", search: "जवाब खोजें...", loading: "दस्तावेज़ लोड हो रहा है..." },
+                'it': { title: "Centro Assistenza", subtitle: "Mantieni la tua vita personale \"veramente personale\": Hide Something è qui per proteggere la tua privacy.", search: "Cerca risposte...", loading: "Caricamento documentazione..." },
+                'ja': { title: "ヘルプセンター", subtitle: "あなたのプライベートな生活を「真に個人的」に保ちます。Hide Somethingはあなたのプライバシーを守ります。", search: "回答を検索...", loading: "ドキュメントを読み込み中..." },
+                'ko': { title: "고객센터", subtitle: "당신의 개인적인 삶을 \"진정으로 사적인\" 상태로 유지하세요 — Hide Something은 당신의 프라이버시를 보호합니다.", search: "답변 검색...", loading: "문서 로딩 중..." },
+                'nl': { title: "Helpcentrum", subtitle: "Houd uw persoonlijke leven \"echt persoonlijk\" — Hide Something is hier om uw privacy te beschermen.", search: "Zoeken naar antwoorden...", loading: "Documentatie laden..." },
+                'pt': { title: "Central de Ajuda", subtitle: "Mantenha sua vida pessoal \"verdadeiramente pessoal\" — o Hide Something está aqui para proteger sua privacidade.", search: "Buscar respostas...", loading: "Carregando documentação..." },
+                'ru': { title: "Справочный центр", subtitle: "Сделайте свою личную жизнь «по-настоящему личной» — Hide Something здесь, чтобы защитить вашу конфиденциальность.", search: "Поиск ответов...", loading: "Загрузка документации..." },
+                'tr': { title: "Yardım Merkezi", subtitle: "Kişisel hayatınızı \"gerçekten kişisel\" tutun — Hide Something gizliliğinizi korumak için burada.", search: "Cevapları ara...", loading: "Dokümantasyon yükleniyor..." },
+                'vi': { title: "Trung tâm Trợ giúp", subtitle: "Giữ cho cuộc sống cá nhân của bạn \"thực sự riêng tư\" — Hide Something ở đây để bảo vệ quyền riêng tư của bạn.", search: "Tìm kiếm câu trả lời...", loading: "Đang tải tài liệu..." }
+            };
             
             // Language detection
             const urlParams = new URLSearchParams(window.location.search);
             const lang = urlParams.get('lang') || 'en';
-            const isZh = lang === 'zh';
+            const currentStrings = uiStrings[lang] || uiStrings['en'];
+            const isRtl = lang === 'ar';
             
-            // Update UI strings based on language
-            if (isZh) {
-                document.getElementById('btn-zh').classList.add('active');
-                titleEl.innerText = "帮助中心";
-                subtitleEl.innerText = "让个人生活“真正私密” —— Hide Something 致力于保护您的隐私。";
-                searchInput.placeholder = "搜索问题...";
-                container.querySelector('.loading').innerHTML = '<div class="spinner"></div>正在加载文档...';
-            } else {
-                document.getElementById('btn-en').classList.add('active');
-            }
+            if (isRtl) document.body.style.direction = 'rtl';
+
+            // Init Selector
+            langSelector.innerText = languages[lang] || 'English';
+            
+            // Toggle Dropdown
+            langSelector.addEventListener('click', (e) => {
+                e.stopPropagation();
+                langContainer.classList.toggle('open');
+            });
+
+            document.addEventListener('click', () => langContainer.classList.remove('open'));
+
+            // Generate Dropdown Items
+            Object.keys(languages).forEach(l => {
+                const a = document.createElement('a');
+                a.href = `?lang=${l}`;
+                a.innerText = languages[l];
+                if (l === lang) a.classList.add('active');
+                langDropdown.appendChild(a);
+            });
+
+            // Update UI
+            titleEl.innerText = currentStrings.title;
+            subtitleEl.innerText = currentStrings.subtitle;
+            searchInput.placeholder = currentStrings.search;
+            container.querySelector('.loading').innerHTML = `<div class="spinner"></div>${currentStrings.loading}`;
             
             const timestamp = new Date().getTime();
-            const mdFile = isZh ? 'hs_help_zh.md' : 'hs_help.md';
+            const mdFile = lang === 'en' ? 'hs_help.md' : `hs_help_${lang}.md`;
             const mdUrl = `${mdFile}?t=${timestamp}`;
 
             fetch(mdUrl)
