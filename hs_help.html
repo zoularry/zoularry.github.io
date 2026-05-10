@@ -241,6 +241,25 @@
             animation: spin 1s linear infinite;
         }
 
+        .lang-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 0.9rem;
+            z-index: 100;
+        }
+
+        .lang-switcher a {
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.2rem 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .lang-switcher a:hover, .lang-switcher a.active {
+            color: var(--accent-teal);
+        }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
@@ -254,11 +273,14 @@
 <body>
 
     <header>
+        <div class="lang-switcher">
+            <a href="?lang=en" id="btn-en">EN</a> | <a href="?lang=zh" id="btn-zh">中文</a>
+        </div>
         <div class="logo-container">
             <img src="assets/img/hdsmth_logo.webp" alt="Hide Something Logo" onerror="this.src='https://raw.githubusercontent.com/zoularry/zoularry.github.io/master/assets/img/hdsmth_logo.webp'">
         </div>
-        <h1>Help Center</h1>
-        <p class="subtitle">Keep your personal life "truly personal" — Hide Something is here to protect your privacy.</p>
+        <h1 id="main-title">Help Center</h1>
+        <p class="subtitle" id="main-subtitle">Keep your personal life "truly personal" — Hide Something is here to protect your privacy.</p>
     </header>
 
     <div class="search-container">
@@ -284,9 +306,28 @@
         document.addEventListener("DOMContentLoaded", function() {
             const container = document.getElementById('markdown-container');
             const searchInput = document.getElementById('search-input');
+            const titleEl = document.getElementById('main-title');
+            const subtitleEl = document.getElementById('main-subtitle');
+            
+            // Language detection
+            const urlParams = new URLSearchParams(window.location.search);
+            const lang = urlParams.get('lang') || 'en';
+            const isZh = lang === 'zh';
+            
+            // Update UI strings based on language
+            if (isZh) {
+                document.getElementById('btn-zh').classList.add('active');
+                titleEl.innerText = "帮助中心";
+                subtitleEl.innerText = "让个人生活“真正私密” —— Hide Something 致力于保护您的隐私。";
+                searchInput.placeholder = "搜索问题...";
+                container.querySelector('.loading').innerHTML = '<div class="spinner"></div>正在加载文档...';
+            } else {
+                document.getElementById('btn-en').classList.add('active');
+            }
             
             const timestamp = new Date().getTime();
-            const mdUrl = `hs_help.md?t=${timestamp}`;
+            const mdFile = isZh ? 'hs_help_zh.md' : 'hs_help.md';
+            const mdUrl = `${mdFile}?t=${timestamp}`;
 
             fetch(mdUrl)
                 .then(response => {
