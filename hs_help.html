@@ -215,12 +215,30 @@
             padding: 4rem 1rem 2rem;
             color: var(--text-muted);
             font-size: 0.85rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
         }
 
-        .footer-logo {
-            width: 40px;
-            opacity: 0.5;
+        .footer-logo-text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            display: inline-block;
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo-text span {
+            color: var(--text-main);
+            opacity: 0.9;
+        }
+
+        .footer-logo-text:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
         }
 
         /* --- Loading State --- */
@@ -375,7 +393,7 @@
     </div>
 
     <footer>
-        <img src="assets/img/hdsmth_logo.webp" alt="HS" class="footer-logo" onerror="this.style.display='none'">
+        <a href="index.html" class="footer-logo-text">Hide<span>Something</span></a>
         <p>&copy; 2026 Hide Something. All rights reserved.</p>
         <p>Keep your personal life "truly personal".</p>
     </footer>

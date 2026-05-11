@@ -105,19 +105,22 @@
         }
 
         .logo-nav {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
             text-decoration: none;
-            color: white;
             font-family: 'Nunito', sans-serif;
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.6rem;
+            color: var(--accent-teal);
+            transition: all 0.3s ease;
+            letter-spacing: -0.5px;
         }
 
-        .logo-nav img {
-            width: 40px;
-            height: auto;
+        .logo-nav span {
+            color: var(--text-main);
+        }
+
+        .logo-nav:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
         }
 
         .nav-links {
@@ -360,10 +363,26 @@
             text-align: center;
         }
 
-        .footer-logo {
-            width: 60px;
+        .footer-logo-text {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            display: inline-block;
             margin-bottom: 2rem;
-            opacity: 0.8;
+            transition: all 0.3s ease;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-logo-text span {
+            color: var(--text-main);
+            opacity: 0.9;
+        }
+
+        .footer-logo-text:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.1);
         }
 
         .footer-links {
@@ -424,10 +443,7 @@
 
     <header id="main-header">
         <div class="nav-container">
-            <a href="#" class="logo-nav">
-                <img src="assets/img/hdsmth_logo.webp" alt="Hide Something" onerror="this.src='https://raw.githubusercontent.com/zoularry/zoularry.github.io/master/assets/img/hdsmth_logo.webp'">
-                <span>Hide Something</span>
-            </a>
+            <a href="#" class="logo-nav">Hide<span>Something</span></a>
             <nav class="nav-links">
                 <a href="#features">Features</a>
                 <a href="#security">Security</a>
@@ -547,7 +563,7 @@
     </main>
 
     <footer>
-        <img src="assets/img/hdsmth_logo.webp" alt="HS Logo" class="footer-logo" onerror="this.src='https://raw.githubusercontent.com/zoularry/zoularry.github.io/master/assets/img/hdsmth_logo.webp'">
+        <a href="#" class="footer-logo-text">Hide<span>Something</span></a>
         <div class="footer-links">
             <a href="#features">Features</a>
             <a href="pp.html">Privacy Policy</a>
