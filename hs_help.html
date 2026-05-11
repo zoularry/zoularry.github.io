@@ -391,21 +391,21 @@
             const langDropdown = document.getElementById('lang-dropdown');
             
             const languages = {
+                'pt': 'Português',
                 'en': 'English',
-                'zh': '中文',
-                'ar': 'العربية',
-                'da': 'Dansk',
-                'de': 'Deutsch',
-                'es': 'Español',
-                'fr': 'Français',
                 'hi': 'हिन्दी',
-                'it': 'Italiano',
+                'es': 'Español',
+                'tr': 'Türkçe',
+                'de': 'Deutsch',
+                'fr': 'Français',
                 'ja': '日本語',
                 'ko': '한국어',
-                'nl': 'Nederlands',
-                'pt': 'Português',
-                'ru': 'Русский',
-                'tr': 'Türkçe',
+                'ar': 'العربية',
+                'da': 'Dansk',
+                'it': 'Italiano',        
+                'nl': 'Nederlands',                
+                'ru': 'Русский',                
+                'zh': '中文',
                 'vi': 'Tiếng Việt'
             };
 
@@ -430,7 +430,13 @@
             
             // Language detection
             const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || 'en';
+            let lang = urlParams.get('lang');
+            
+            if (!lang) {
+                const browserLang = (navigator.language || navigator.userLanguage || 'en').split('-')[0].toLowerCase();
+                lang = languages[browserLang] ? browserLang : 'en';
+            }
+            
             const currentStrings = uiStrings[lang] || uiStrings['en'];
             const isRtl = lang === 'ar';
             
