@@ -464,7 +464,7 @@
             
             const timestamp = new Date().getTime();
             const mdFile = lang === 'en' ? 'hs_help.md' : `hs_help_${lang}.md`;
-            const mdUrl = `${mdFile}?t=${timestamp}`;
+            const mdUrl = `md/${mdFile}?t=${timestamp}`;
 
             fetch(mdUrl)
                 .then(response => {
