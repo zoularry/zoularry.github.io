@@ -70,12 +70,19 @@
         .btn-outline {
             border: 2px solid var(--accent-teal);
             color: var(--accent-teal);
-            margin-left: 1rem;
         }
 
         .btn-outline:hover {
             background: rgba(32, 201, 151, 0.1);
             transform: translateY(-3px);
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
         }
 
         /* --- Header --- */
@@ -217,6 +224,9 @@
         .stars {
             color: #ffcc00;
             font-size: 0.9rem;
+            display: flex;
+            gap: 4px;
+            white-space: nowrap;
         }
 
         .trust-text {
@@ -436,6 +446,32 @@
             .hero h1 { font-size: 3rem; }
             .nav-links { display: none; }
             .section-header h2 { font-size: 2.2rem; }
+            
+            .btn-common {
+                padding: 0.8rem 1.8rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .cta-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            .cta-group .btn-common {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+            .trust-badge {
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem;
+                border-radius: 20px;
+                width: 90%;
+                max-width: 320px;
+            }
         }
     </style>
 </head>
@@ -557,7 +593,9 @@
             <div class="reveal">
                 <h2 style="font-family: 'Nunito', sans-serif; font-size: 3rem; margin-bottom: 1.5rem;">Ready to take control?</h2>
                 <p style="color: var(--text-muted); margin-bottom: 3rem; font-size: 1.2rem;">Join millions of users who trust Hide Something with their most precious memories.</p>
-                <a href="https://play.google.com/store/apps/details?id=com.colure.app.privacygallery" class="btn-common btn-primary">Download for Free</a>
+                <div class="cta-group">
+                    <a href="https://play.google.com/store/apps/details?id=com.colure.app.privacygallery" class="btn-common btn-primary">Download for Free</a>
+                </div>
             </div>
         </section>
     </main>
