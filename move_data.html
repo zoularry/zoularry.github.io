@@ -214,6 +214,66 @@
             width: 100%;
             padding: 0 15px;
         }
+        /* Right fading mask to indicate more scrollable content */
+        .lang-selector-container::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            right: 21px;
+            bottom: 7px;
+            width: 70px;
+            background: linear-gradient(to right, rgba(10, 46, 41, 0) 0%, rgba(10, 46, 41, 0.9) 70%, rgba(10, 46, 41, 0.98) 100%);
+            pointer-events: none;
+            border-radius: 0 40px 40px 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        .lang-selector-container.scrolled::after {
+            opacity: 0.3;
+        }
+
+        /* Swipe Hint Indicator */
+        .scroll-hint {
+            position: absolute;
+            right: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: var(--color-accent-bright);
+            pointer-events: none;
+            animation: pulseHint 2s infinite;
+            text-shadow: 0 0 8px rgba(52, 231, 228, 0.6);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(7, 31, 27, 0.9);
+            padding: 5px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(52, 231, 228, 0.25);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .lang-selector-container.scrolled .scroll-hint {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-50%) translateX(10px);
+            animation: none;
+            pointer-events: none;
+        }
+
+        @keyframes pulseHint {
+            0%, 100% {
+                opacity: 0.9;
+                transform: translateY(-50%) translateX(0);
+            }
+            50% {
+                opacity: 0.4;
+                transform: translateY(-50%) translateX(5px);
+            }
+        }
         .lang-selector {
             display: flex;
             gap: 6px;
@@ -484,6 +544,10 @@
             <a href="#kr" id="nav-kr">한국어</a>
             <a href="#ja" id="nav-ja">日本語</a>
             <a href="#it" id="nav-it">Italiano</a>
+        </div>
+        <div class="scroll-hint">
+            <span>Swipe</span>
+            <i class="lni-chevron-right"></i>
         </div>
     </div>
 
@@ -1334,6 +1398,27 @@
         }
         window.addEventListener('load', showSectionFromHash);
         window.addEventListener('hashchange', showSectionFromHash);
+
+        // Hide scroll hint indicator when the user scrolls the language container
+        const selectorContainer = document.querySelector('.lang-selector-container');
+        const selector = document.querySelector('.lang-selector');
+        
+        function checkScroll() {
+            if (selector && selectorContainer) {
+                if (selector.scrollLeft > 15) {
+                    selectorContainer.classList.add('scrolled');
+                } else {
+                    selectorContainer.classList.remove('scrolled');
+                }
+            }
+        }
+        
+        if (selector && selectorContainer) {
+            selector.addEventListener('scroll', checkScroll);
+            // Check immediately and also after some delay to accommodate auto-scrolling
+            checkScroll();
+            setTimeout(checkScroll, 400);
+        }
     </script>
 
 </body>
