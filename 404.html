@@ -3,40 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connecting to Device...</title>
+    <title>Connecting to Device | Hide Something</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f4f4f5;
-            color: #18181b;
+        :root {
+            --color-bg-primary: #0a2e29;
+            --color-bg-secondary: #071f1b;
+            --color-accent-teal: #20c997;
+            --color-accent-bright: #34e7e4;
+            --color-text-main: #f8f9fa;
+            --color-text-muted: #a0aec0;
+            --color-glass-bg: rgba(255, 255, 255, 0.04);
+            --color-glass-border: rgba(255, 255, 255, 0.08);
+            --radius-card: 24px;
+            --radius-full: 50px;
         }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-bg-primary);
+            color: var(--color-text-main);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            background-image:
+                radial-gradient(circle at 10% 15%, rgba(32, 201, 151, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 85%, rgba(52, 231, 228, 0.06) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+        }
+
+        /* 极简居中卡片 (无图片依赖) */
         .container {
             text-align: center;
-            padding: 2.5rem;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            padding: 3rem 2.2rem;
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--color-glass-border);
+            border-radius: var(--radius-card);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
             max-width: 420px;
-            width: 90%;
+            width: 100%;
+            transition: all 0.3s ease;
         }
-        h2 { margin-top: 0; font-size: 1.5rem; font-weight: 600; color: #000; }
-        p { color: #52525b; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1.5rem; }
+
+        /* 极简文本品牌字 */
+        .brand-mark {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--color-accent-teal);
+            letter-spacing: -0.5px;
+            margin-bottom: 2rem;
+            display: inline-block;
+            text-decoration: none;
+            opacity: 0.95;
+            transition: opacity 0.2s ease;
+        }
+
+        .brand-mark span {
+            color: var(--color-text-main);
+        }
+
+        .brand-mark:hover {
+            opacity: 1;
+        }
+
+        /* 纯 CSS 环形加载微动效 */
+        .loader-wrapper {
+            margin: 0 auto 1.75rem;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .loader {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #3b82f6;
+            border: 2.5px solid rgba(255, 255, 255, 0.08);
+            border-top-color: var(--color-accent-teal);
+            border-right-color: var(--color-accent-bright);
             border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
         }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .error-text { color: #ef4444; }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* 状态标题与说明 */
+        h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: var(--color-text-main);
+            margin-bottom: 0.6rem;
+            letter-spacing: -0.3px;
+        }
+
+        p {
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+            font-weight: 400;
+        }
+
+        /* 错误状态样式 */
+        .error-code {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            line-height: 1;
+            color: var(--color-accent-bright);
+            margin-bottom: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* 兜底返回主页操作 */
+        .action-group {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .btn-home {
+            display: inline-block;
+            padding: 0.75rem 1.8rem;
+            border-radius: var(--radius-full);
+            background: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-bright) 100%);
+            color: var(--color-bg-primary);
+            text-decoration: none;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 0.92rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 20px rgba(32, 201, 151, 0.25);
+        }
+
+        .btn-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(32, 201, 151, 0.35);
+            filter: brightness(1.05);
+        }
     </style>
 
     <script>
@@ -46,6 +171,9 @@
             
             const titleEl = document.getElementById('status-title');
             const descEl = document.getElementById('status-desc');
+            const loaderWrapper = document.getElementById('loader-wrapper');
+            const actionGroup = document.getElementById('action-group');
+            const errorCodeEl = document.getElementById('error-code');
             let targetIp = "";
 
             // 路由逻辑推导
@@ -62,24 +190,39 @@
             }
 
             if (targetIp) {
-                // 执行跳转
+                // 找到对应局域网设备，执行跳转
                 const targetUrl = `http://${targetIp}:9999`;
                 window.location.replace(targetUrl);
             } else {
-                // 无法识别的路径
-                document.querySelector('.loader').style.display = 'none';
-                titleEl.textContent = "404 Not Found";
-                titleEl.classList.add("error-text");
-                descEl.textContent = "Invalid short code. Please check the address displayed in your app.";
+                // 无法识别的路径，切换为极简 404 状态
+                document.title = "404 Not Found | Hide Something";
+                loaderWrapper.style.display = 'none';
+                errorCodeEl.style.display = 'block';
+                titleEl.textContent = "Page Not Found";
+                descEl.textContent = "The requested link is unavailable or the code is invalid. Check the address in your app or return to homepage.";
+                actionGroup.style.display = 'block';
             }
         });
     </script>
 </head>
 <body>
-    <div class="container">
-        <div class="loader"></div>
+    <main class="container">
+        <a href="/" class="brand-mark" title="Hide Something">
+            Hide<span>Something</span>
+        </a>
+
+        <div class="loader-wrapper" id="loader-wrapper">
+            <div class="loader"></div>
+        </div>
+
+        <div class="error-code" id="error-code" style="display: none;">404</div>
+
         <h2 id="status-title">Connecting to device...</h2>
         <p id="status-desc">Redirecting to your local network. Make sure this computer is on the same Wi-Fi.</p>
-    </div>
+
+        <div class="action-group" id="action-group">
+            <a href="/" class="btn-home">Back to Home</a>
+        </div>
+    </main>
 </body>
 </html>

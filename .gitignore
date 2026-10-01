@@ -2,3 +2,4 @@ docs/
 .agents/
 .DS_Store
 skills-lock.json
+assets/.DS_Store
