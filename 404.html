@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,220 +10,472 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Nunito:wght@700;800;900;1000&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --color-bg-primary: #0a2e29;
-            --color-bg-secondary: #071f1b;
-            --color-accent-teal: #20c997;
-            --color-accent-bright: #34e7e4;
-            --color-text-main: #f8f9fa;
-            --color-text-muted: #a0aec0;
-            --color-glass-bg: rgba(255, 255, 255, 0.04);
-            --color-glass-border: rgba(255, 255, 255, 0.08);
-            --radius-card: 24px;
-            --radius-full: 50px;
+            --bg-deep: #051613;
+            --bg-primary: #0a2e29;
+            --bg-secondary: #071f1b;
+            --bg-card: rgba(14, 46, 40, 0.55);
+
+            --accent-teal: #20c997;
+            --accent-teal-glow: rgba(32, 201, 151, 0.45);
+            --accent-bright: #34e7e4;
+
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass-hover: rgba(52, 231, 228, 0.35);
+
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+            --text-muted: #94a3b8;
+
+            --font-headings: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --radius-card: 28px;
+            --radius-pill: 9999px;
+
+            --shadow-float: 0 25px 60px -10px rgba(0, 0, 0, 0.7);
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
         }
 
+        html,
         body {
-            background-color: var(--color-bg-primary);
-            color: var(--color-text-main);
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
             min-height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 1.5rem;
-            background-image:
-                radial-gradient(circle at 10% 15%, rgba(32, 201, 151, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 85%, rgba(52, 231, 228, 0.06) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+            position: relative;
         }
 
-        /* 极简居中卡片 (无图片依赖) */
-        .container {
-            text-align: center;
-            padding: 3rem 2.2rem;
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--color-glass-border);
-            border-radius: var(--radius-card);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-            max-width: 420px;
+        /* Analog noise texture */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
             width: 100%;
-            transition: all 0.3s ease;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
         }
 
-        /* 极简文本品牌字 */
-        .brand-mark {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: 1.35rem;
-            color: var(--color-accent-teal);
-            letter-spacing: -0.5px;
-            margin-bottom: 2rem;
-            display: inline-block;
-            text-decoration: none;
-            opacity: 0.95;
-            transition: opacity 0.2s ease;
+        /* Living Canvas */
+        #ambient-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .brand-mark span {
-            color: var(--color-text-main);
+        .aurora-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            max-width: 100vw;
+            height: 600px;
+            background: radial-gradient(circle, rgba(32, 201, 151, 0.16) 0%, rgba(52, 231, 228, 0.06) 50%, transparent 70%);
+            filter: blur(75px);
+            pointer-events: none;
+            z-index: 1;
         }
 
-        .brand-mark:hover {
-            opacity: 1;
+        /* Center Card */
+        .console-card {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 460px;
+            text-align: center;
+            padding: 3.5rem 2.4rem;
+            background: var(--bg-card);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-card);
+            box-shadow: var(--shadow-float), 0 0 40px rgba(32, 201, 151, 0.15);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 纯 CSS 环形加载微动效 */
-        .loader-wrapper {
-            margin: 0 auto 1.75rem;
-            width: 44px;
-            height: 44px;
+        .console-card:hover {
+            border-color: var(--border-glass-hover);
+            box-shadow: var(--shadow-float), 0 0 55px rgba(52, 231, 228, 0.25);
+        }
+
+        /* Mascot Stage with Orbital Energy Ring */
+        .mascot-stage {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 1.8rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .loader {
-            border: 2.5px solid rgba(255, 255, 255, 0.08);
-            border-top-color: var(--color-accent-teal);
-            border-right-color: var(--color-accent-bright);
+        .orbital-ring {
+            position: absolute;
+            inset: -8px;
             border-radius: 50%;
+            border: 1.5px dashed rgba(52, 231, 228, 0.4);
+            animation: orbitSpin 18s linear infinite;
+        }
+
+        @keyframes orbitSpin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .mascot-core {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(32, 201, 151, 0.2) 0%, transparent 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mascot-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 22px rgba(32, 201, 151, 0.45));
+            animation: mascotFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes mascotFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        /* Brand Logo */
+        .brand-logo {
+            font-family: var(--font-headings);
+            font-weight: 1000;
+            font-size: 1.45rem;
+            color: var(--accent-teal);
+            text-decoration: none;
+            letter-spacing: -0.03em;
+            margin-bottom: 2rem;
+            display: inline-block;
+            transition: transform 0.25s ease;
+        }
+
+        .brand-logo span {
+            color: var(--text-main);
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.03);
+        }
+
+        /* Pulse Radar / Loader */
+        .radar-box {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .radar-circle {
+            position: absolute;
+            border: 1.5px solid var(--accent-bright);
+            border-radius: 50%;
+            animation: radarPulse 2.4s infinite cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .radar-circle:nth-child(1) {
             width: 32px;
             height: 32px;
-            animation: spin 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+            animation-delay: 0s;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .radar-circle:nth-child(2) {
+            width: 54px;
+            height: 54px;
+            animation-delay: 0.8s;
         }
 
-        /* 状态标题与说明 */
+        .radar-center-dot {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-teal);
+            border-radius: 50%;
+            box-shadow: 0 0 15px var(--accent-teal);
+            z-index: 2;
+        }
+
+        @keyframes radarPulse {
+            0% {
+                transform: scale(0.6);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+
+        /* 404 Display */
+        .error-code {
+            font-family: var(--font-headings);
+            font-weight: 1000;
+            font-size: 4rem;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+            display: none;
+        }
+
         h2 {
-            font-family: 'Nunito', sans-serif;
-            font-size: 1.45rem;
-            font-weight: 800;
-            color: var(--color-text-main);
+            font-family: var(--font-headings);
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #ffffff;
             margin-bottom: 0.6rem;
-            letter-spacing: -0.3px;
+            letter-spacing: -0.02em;
         }
 
         p {
-            color: var(--color-text-muted);
-            font-size: 0.95rem;
-            line-height: 1.6;
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            line-height: 1.65;
             margin-bottom: 0;
-            font-weight: 400;
         }
 
-        /* 错误状态样式 */
-        .error-code {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: 3rem;
-            line-height: 1;
-            color: var(--color-accent-bright);
-            margin-bottom: 0.75rem;
-            opacity: 0.9;
-        }
-
-        /* 兜底返回主页操作 */
+        /* Action Buttons */
         .action-group {
             display: none;
-            margin-top: 2rem;
+            margin-top: 2.2rem;
         }
 
         .btn-home {
-            display: inline-block;
-            padding: 0.75rem 1.8rem;
-            border-radius: var(--radius-full);
-            background: linear-gradient(135deg, var(--color-accent-teal) 0%, var(--color-accent-bright) 100%);
-            color: var(--color-bg-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.85rem 2rem;
+            border-radius: var(--radius-pill);
+            background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-bright) 100%);
+            color: var(--bg-deep);
             text-decoration: none;
-            font-family: 'Nunito', sans-serif;
+            font-family: var(--font-headings);
             font-weight: 800;
             font-size: 0.92rem;
-            transition: all 0.25s ease;
-            box-shadow: 0 8px 20px rgba(32, 201, 151, 0.25);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            box-shadow: 0 10px 25px rgba(32, 201, 151, 0.35);
+            transition: all 0.3s ease;
         }
 
         .btn-home:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 24px rgba(32, 201, 151, 0.35);
+            box-shadow: 0 14px 32px rgba(32, 201, 151, 0.5);
             filter: brightness(1.05);
         }
+
+        @media (max-width: 480px) {
+            .console-card {
+                padding: 2.6rem 1.4rem;
+                border-radius: 22px;
+            }
+
+            .error-code {
+                font-size: 3.2rem;
+            }
+
+            h2 {
+                font-size: 1.3rem;
+            }
+
+            p {
+                font-size: 0.92rem;
+            }
+        }
     </style>
+</head>
+
+<body>
+    <!-- Analog Noise Overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <!-- Living Ambient Canvas -->
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+    <div class="aurora-glow" aria-hidden="true"></div>
+
+    <main class="console-card">
+        <div class="mascot-stage">
+            <div class="orbital-ring"></div>
+            <div class="mascot-core">
+                <img src="assets/img/hdsmth_logo.webp" alt="Teal Magic Ghost Logo" class="mascot-img">
+            </div>
+        </div>
+
+        <a href="index.html" class="brand-logo" title="Hide Something Homepage">
+            Hide<span>Something</span>
+        </a>
+
+        <!-- Animated Radar Loader -->
+        <div class="radar-box" id="radarBox">
+            <div class="radar-circle"></div>
+            <div class="radar-circle"></div>
+            <div class="radar-center-dot"></div>
+        </div>
+
+        <div class="error-code" id="errorCode">404</div>
+
+        <h2 id="statusTitle">Connecting to Device...</h2>
+        <p id="statusDesc">Redirecting to your phone on the local network. Please ensure this computer is on the same Wi-Fi network.</p>
+
+        <div class="action-group" id="actionGroup">
+            <a href="index.html" class="btn-home">
+                <i class="fas fa-house"></i> Return to Sanctuary
+            </a>
+        </div>
+    </main>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 获取路径并移除前导斜杠
+            /* 1. LIVING AMBIENT CANVAS */
+            const canvas = document.getElementById('ambient-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 28;
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.4;
+                    this.speedY = (Math.random() - 0.5) * 0.4;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(52, 231, 228, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateCanvas);
+            }
+            animateCanvas();
+
+            /* 2. LOCAL WI-FI ROUTING LOGIC & 404 FALLBACK */
             const path = window.location.pathname.replace(/^\/+/, '');
-            
-            const titleEl = document.getElementById('status-title');
-            const descEl = document.getElementById('status-desc');
-            const loaderWrapper = document.getElementById('loader-wrapper');
-            const actionGroup = document.getElementById('action-group');
-            const errorCodeEl = document.getElementById('error-code');
+            const titleEl = document.getElementById('statusTitle');
+            const descEl = document.getElementById('statusDesc');
+            const radarBox = document.getElementById('radarBox');
+            const actionGroup = document.getElementById('actionGroup');
+            const errorCodeEl = document.getElementById('errorCode');
             let targetIp = "";
 
-            // 路由逻辑推导
             if (/^0\d+$/.test(path)) {
-                // 规则 1: 0开头 (如 031) -> 192.168.0.31
+                // Rule 1: Starts with 0 (e.g., 031) -> 192.168.0.31
                 const suffix = parseInt(path, 10);
                 targetIp = `192.168.0.${suffix}`;
             } else if (/^\d+$/.test(path)) {
-                // 规则 2: 纯数字 (如 31) -> 192.168.1.31
+                // Rule 2: Pure numbers (e.g., 31) -> 192.168.1.31
                 targetIp = `192.168.1.${path}`;
             } else if (/^\d+(\.\d+)+$/.test(path)) {
-                // 规则 3: 带点的路径 (如 3.31) -> 192.168.3.31
+                // Rule 3: Dotted path (e.g., 3.31) -> 192.168.3.31
                 targetIp = `192.168.${path}`;
             }
 
             if (targetIp) {
-                // 找到对应局域网设备，执行跳转
+                // Device located, redirect to local phone web server
                 const targetUrl = `http://${targetIp}:9999`;
                 window.location.replace(targetUrl);
             } else {
-                // 无法识别的路径，切换为极简 404 状态
+                // Unrecognized path, gracefully present 404 state
                 document.title = "404 Not Found | Hide Something";
-                loaderWrapper.style.display = 'none';
+                radarBox.style.display = 'none';
                 errorCodeEl.style.display = 'block';
                 titleEl.textContent = "Page Not Found";
-                descEl.textContent = "The requested link is unavailable or the code is invalid. Check the address in your app or return to homepage.";
+                descEl.textContent = "The requested local device link is unavailable or the shortcut is invalid. Please verify the address inside your Hide Something app or return to the sanctuary.";
                 actionGroup.style.display = 'block';
             }
         });
     </script>
-</head>
-<body>
-    <main class="container">
-        <a href="/" class="brand-mark" title="Hide Something">
-            Hide<span>Something</span>
-        </a>
-
-        <div class="loader-wrapper" id="loader-wrapper">
-            <div class="loader"></div>
-        </div>
-
-        <div class="error-code" id="error-code" style="display: none;">404</div>
-
-        <h2 id="status-title">Connecting to device...</h2>
-        <p id="status-desc">Redirecting to your local network. Make sure this computer is on the same Wi-Fi.</p>
-
-        <div class="action-group" id="action-group">
-            <a href="/" class="btn-home">Back to Home</a>
-        </div>
-    </main>
 </body>
+
 </html>

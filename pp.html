@@ -1,317 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy | Hide Something</title>
-    
+    <meta name="description"
+        content="Hide Something official Privacy Policy. Transparent, local-first privacy architecture with zero cloud storage and absolute user data sovereignty.">
+
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Nunito:wght@600;700;800;900;1000&display=swap"
+        rel="stylesheet">
+
     <!-- Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
+        /* -------------------------------------------------------------
+           1. DESIGN TOKENS
+           ------------------------------------------------------------- */
         :root {
-            --primary-bg: #0a2e29;
-            --secondary-bg: #071f1b;
+            --bg-deep: #051613;
+            --bg-primary: #0a2e29;
+            --bg-secondary: #071f1b;
+            --bg-card: rgba(14, 46, 40, 0.45);
+
             --accent-teal: #20c997;
+            --accent-teal-glow: rgba(32, 201, 151, 0.45);
             --accent-bright: #34e7e4;
-            --text-main: #f8f9fa;
-            --text-muted: #a0aec0;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --card-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-glass-hover: rgba(52, 231, 228, 0.35);
+
+            --text-main: #f8fafc;
+            --text-sub: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-faint: #64748b;
+
+            --font-headings: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 36px;
+            --radius-pill: 9999px;
+
+            --shadow-float: 0 20px 48px -10px rgba(0, 0, 0, 0.55);
+            --transition-smooth: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
+            min-height: 100vh;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.7;
             scroll-behavior: smooth;
         }
 
-        body {
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 5% 10%, rgba(32, 201, 151, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 95% 90%, rgba(52, 231, 228, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 50% 50%, rgba(10, 46, 41, 1) 0%, rgba(7, 31, 27, 1) 100%);
+        ::selection {
+            background: var(--accent-teal);
+            color: var(--bg-deep);
         }
 
-        /* --- Header --- */
+        /* Analog noise overlay */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Living Canvas */
+        #ambient-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .aurora-glow-1 {
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            max-width: 100vw;
+            height: 550px;
+            background: radial-gradient(ellipse at center, rgba(32, 201, 151, 0.16) 0%, rgba(52, 231, 228, 0.06) 45%, transparent 70%);
+            filter: blur(70px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Scroll progress bar */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--accent-teal), var(--accent-bright));
+            z-index: 2000;
+            box-shadow: 0 0 10px var(--accent-bright);
+            transition: width 0.08s linear;
+        }
+
+        /* -------------------------------------------------------------
+           2. NAVIGATION
+           ------------------------------------------------------------- */
         header {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
             z-index: 1000;
-            padding: 1.5rem 0;
-            transition: all 0.3s ease;
+            padding: 1.4rem 2rem;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         header.scrolled {
-            padding: 1rem 0;
-            background: rgba(10, 46, 41, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--glass-border);
+            padding: 0.8rem 2rem;
         }
 
-        .nav-container {
-            max-width: 1200px;
+        .nav-wrapper {
+            max-width: 1220px;
             margin: 0 auto;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
+            padding: 0.75rem 1.6rem;
+            border-radius: var(--radius-pill);
+            background: rgba(10, 46, 41, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+            transition: var(--transition-smooth);
         }
 
-        .logo-nav {
-            text-decoration: none;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: 1.6rem;
-            color: var(--accent-teal);
-            transition: all 0.3s ease;
-            letter-spacing: -0.5px;
+        header.scrolled .nav-wrapper {
+            background: rgba(7, 31, 27, 0.9);
+            border-color: rgba(32, 201, 151, 0.22);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.55);
         }
 
-        .logo-nav span {
-            color: var(--text-main);
-        }
-
-        .nav-links {
+        .brand-logo {
             display: flex;
-            gap: 2.5rem;
             align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            font-family: var(--font-headings);
+            font-size: 1.55rem;
+            font-weight: 1000;
+            color: var(--accent-teal);
+            letter-spacing: -0.03em;
+            transition: var(--transition-smooth);
         }
 
-        .nav-links a {
+        .brand-logo:hover {
+            transform: scale(1.02);
+            filter: brightness(1.15);
+        }
+
+        .brand-logo img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 8px var(--accent-teal-glow));
+        }
+
+        .brand-logo span {
             color: var(--text-main);
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: var(--text-sub);
             text-decoration: none;
+            font-size: 0.92rem;
             font-weight: 600;
-            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            position: relative;
+            padding: 0.3rem 0;
             transition: color 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: var(--accent-teal);
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0%;
+            height: 2px;
+            background: var(--accent-bright);
+            border-radius: 2px;
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-common {
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-family: 'Nunito', sans-serif;
-            font-size: 0.8rem;
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #ffffff;
         }
 
-        .btn-primary {
+        .nav-menu a:hover::after,
+        .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .btn-download {
+            padding: 0.55rem 1.35rem;
+            border-radius: var(--radius-pill);
             background: linear-gradient(135deg, var(--accent-teal) 0%, var(--accent-bright) 100%);
-            color: var(--primary-bg);
+            color: var(--bg-deep);
+            font-family: var(--font-headings);
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(32, 201, 151, 0.35);
         }
 
-        /* --- Content Page Styling --- */
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(32, 201, 151, 0.5);
+        }
+
+        .mobile-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        /* Mobile Drawer */
+        .drawer-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2001;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 82%;
+            max-width: 320px;
+            height: 100vh;
+            height: 100dvh;
+            background: rgba(7, 31, 27, 0.98);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-left: 1px solid var(--border-glass);
+            padding: 2.5rem 1.8rem;
+            z-index: 2002;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.7);
+        }
+
+        .mobile-drawer.open {
+            right: 0;
+        }
+
+        .drawer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .drawer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .drawer-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.05rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+        }
+
+        .close-drawer-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.4rem;
+        }
+
+        /* -------------------------------------------------------------
+           3. POLICY HERO & CORE PILLARS
+           ------------------------------------------------------------- */
         .page-hero {
-            padding: 10rem 2rem 4rem;
+            padding: 10.5rem 2rem 3.5rem;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(10, 46, 41, 0), var(--primary-bg));
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .policy-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.4rem 1.1rem;
+            border-radius: var(--radius-pill);
+            background: rgba(32, 201, 151, 0.08);
+            border: 1px solid rgba(52, 231, 228, 0.25);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-bright);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-bottom: 1.4rem;
         }
 
         .page-hero h1 {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 900;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            color: var(--accent-teal);
+            font-family: var(--font-headings);
+            font-size: clamp(2.4rem, 6vw, 4rem);
+            font-weight: 1000;
+            letter-spacing: -0.03em;
+            line-height: 1.12;
             margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 40%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .last-updated {
             color: var(--text-muted);
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
         }
 
+        /* Privacy Enclave Badges */
+        .enclave-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .enclave-badge {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-pill);
+            padding: 0.55rem 1.25rem;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--accent-bright);
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            backdrop-filter: blur(14px);
+        }
+
+        /* -------------------------------------------------------------
+           4. POLICY CONTENT SECTION
+           ------------------------------------------------------------- */
         .content-section {
-            max-width: 900px;
-            margin: 0 auto 8rem;
+            max-width: 960px;
+            margin: 0 auto 7rem;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
 
         .policy-container {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 4rem;
-            backdrop-filter: blur(10px);
-            box-shadow: var(--card-shadow);
+            background: var(--bg-card);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 4.5rem 4rem;
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            box-shadow: var(--shadow-float), 0 0 50px rgba(32, 201, 151, 0.12);
+            position: relative;
+            overflow: hidden;
         }
 
         .policy-container h2 {
-            font-family: 'Nunito', sans-serif;
-            color: var(--accent-teal);
-            font-size: 1.8rem;
-            margin: 2.5rem 0 1.2rem;
+            font-family: var(--font-headings);
+            color: #ffffff;
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin: 3.2rem 0 1.2rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.9rem;
+            letter-spacing: -0.02em;
+        }
+
+        .policy-container h2:first-of-type {
+            margin-top: 1.5rem;
         }
 
         .policy-container h2::before {
             content: '';
             display: block;
             width: 4px;
-            height: 1.5rem;
-            background: var(--accent-bright);
+            height: 1.4rem;
+            background: linear-gradient(180deg, var(--accent-teal), var(--accent-bright));
             border-radius: 2px;
-        }
-
-        .policy-container h2:first-of-type {
-            margin-top: 0;
+            flex-shrink: 0;
         }
 
         .policy-container h3 {
-            font-family: 'Nunito', sans-serif;
-            color: var(--text-main);
+            font-family: var(--font-headings);
+            color: var(--accent-bright);
             font-size: 1.3rem;
-            margin: 1.5rem 0 1rem;
+            font-weight: 800;
+            margin: 1.8rem 0 0.8rem;
         }
 
         .policy-container p {
-            margin-bottom: 1.5rem;
-            color: var(--text-main);
-            opacity: 0.9;
+            margin-bottom: 1.4rem;
+            color: var(--text-sub);
+            font-size: 1.02rem;
             line-height: 1.8;
         }
 
         .policy-container ul {
-            margin-bottom: 1.5rem;
-            padding-left: 1.5rem;
+            margin-bottom: 1.8rem;
+            padding-left: 0;
             list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
         }
 
-        .policy-container li {
-            margin-bottom: 0.8rem;
+        .policy-container ul li {
             position: relative;
-            padding-left: 1.5rem;
-            opacity: 0.9;
+            padding-left: 1.8rem;
+            color: var(--text-sub);
+            font-size: 0.98rem;
+            line-height: 1.7;
         }
 
-        .policy-container li::before {
-            content: '\f00c';
+        .policy-container ul li::before {
+            content: '\f058';
             font-family: 'Font Awesome 6 Free';
             font-weight: 900;
             position: absolute;
             left: 0;
+            top: 0.1rem;
             color: var(--accent-teal);
-            font-size: 0.8rem;
-            top: 0.3rem;
+            font-size: 0.9rem;
         }
 
         .policy-container a {
             color: var(--accent-bright);
-            text-decoration: none;
-            border-bottom: 1px dashed var(--accent-bright);
-            transition: all 0.3s ease;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: color 0.2s ease;
         }
 
         .policy-container a:hover {
-            color: var(--accent-teal);
-            border-bottom-style: solid;
+            color: #ffffff;
         }
 
-        .policy-container strong {
-            color: var(--accent-teal);
+        .highlight-box {
+            background: rgba(32, 201, 151, 0.08);
+            border-left: 4px solid var(--accent-teal);
+            border-radius: 0 16px 16px 0;
+            padding: 1.4rem 1.6rem;
+            margin: 1.8rem 0;
+            color: #ffffff;
+            font-size: 1.02rem;
+            line-height: 1.7;
         }
 
-        /* --- Footer --- */
+        /* -------------------------------------------------------------
+           5. FOOTER
+           ------------------------------------------------------------- */
         footer {
-            padding: 6rem 2rem 3rem;
-            background: #051613;
+            background: #030d0b;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 5rem 2rem 3rem;
             text-align: center;
+            position: relative;
+            z-index: 2;
         }
 
-        .footer-logo-text {
-            font-family: 'Nunito', sans-serif;
-            font-weight: 800;
+        .footer-logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-headings);
             font-size: 1.8rem;
+            font-weight: 1000;
             color: var(--accent-teal);
             text-decoration: none;
-            display: inline-block;
-            margin-bottom: 2rem;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.4rem;
         }
 
-        .footer-logo-text span {
+        .footer-logo span {
             color: var(--text-main);
         }
 
-        .footer-links {
+        .footer-nav {
             display: flex;
+            gap: 2.2rem;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
             justify-content: center;
-            gap: 3rem;
-            margin-bottom: 3rem;
         }
 
-        .footer-links a {
+        .footer-nav a {
             color: var(--text-muted);
             text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
             transition: color 0.3s ease;
         }
 
-        .footer-links a:hover {
-            color: var(--accent-teal);
+        .footer-nav a:hover {
+            color: var(--accent-bright);
         }
 
         .copyright {
-            color: var(--text-muted);
+            color: var(--text-faint);
             font-size: 0.85rem;
-            border-top: 1px solid var(--glass-border);
-            padding-top: 3rem;
+            line-height: 1.7;
         }
 
         @media (max-width: 768px) {
-            .policy-container {
-                padding: 2.5rem 1.5rem;
+            header {
+                padding: 0.8rem 1rem;
             }
-            .nav-links {
-                display: none;
+
+            .nav-menu,
+            .btn-download {
+                display: none !important;
+            }
+
+            .mobile-hamburger {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .page-hero {
+                padding: 7.5rem 1.25rem 2.5rem;
+            }
+
+            .page-hero h1 {
+                font-size: clamp(2rem, 8vw, 2.7rem);
+            }
+
+            .enclave-badges {
+                gap: 0.6rem;
+            }
+
+            .enclave-badge {
+                font-size: 0.78rem;
+                padding: 0.45rem 1rem;
+            }
+
+            .content-section {
+                padding: 0 1.25rem;
+                margin-bottom: 5rem;
+            }
+
+            .policy-container {
+                padding: 2.4rem 1.5rem;
+                border-radius: 24px;
+            }
+
+            .policy-container h2 {
+                font-size: 1.35rem;
+            }
+
+            .policy-container p,
+            .policy-container ul li {
+                font-size: 0.95rem;
             }
         }
     </style>
 </head>
-<body>
 
+<body>
+    <!-- Analog Noise Overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+
+    <!-- Scroll Progress Indicator -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <!-- Living Ambient Canvas -->
+    <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+    <div class="aurora-glow-1" aria-hidden="true"></div>
+
+    <!-- Header Navigation -->
     <header id="main-header">
-        <div class="nav-container">
-            <a href="index.html" class="logo-nav">Hide<span>Something</span></a>
-            <nav class="nav-links">
-                <a href="index.html#features">Features</a>
-                <a href="index.html#security">Security</a>
-                <a href="hs_help.html">Help Center</a>
-                <a href="pp.html">Privacy</a>
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo" aria-label="Hide Something Homepage">
+                <img src="assets/img/hdsmth_logo.webp" alt="Teal Magic Ghost Logo" width="32" height="32">
+                <div>Hide<span>Something</span></div>
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html#features">Features</a></li>
+                    <li><a href="move_data.html">Move Data</a></li>
+                    <li><a href="hs_help.html">Help Center</a></li>
+                    <li><a href="pp.html" class="active">Privacy Policy</a></li>
+                </ul>
             </nav>
-            <a href="https://play.google.com/store/apps/details?id=com.colure.app.privacygallery" class="btn-common btn-primary">Download</a>
+
+            <a href="https://play.google.com/store/apps/details?id=com.colure.app.privacygallery" class="btn-download"
+                target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-google-play"></i> Get App
+            </a>
+
+            <button class="mobile-hamburger" id="mobileMenuBtn" aria-label="Toggle navigation drawer">
+                <i class="fas fa-bars"></i>
+            </button>
         </div>
     </header>
 
+    <!-- Mobile Navigation Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+    <aside class="mobile-drawer" id="mobileDrawer" aria-label="Mobile Navigation">
+        <div>
+            <div class="drawer-header">
+                <a href="index.html" class="brand-logo" style="font-size: 1.3rem;">
+                    <img src="assets/img/hdsmth_logo.webp" alt="Ghost Logo" width="28" height="28">
+                    <div>Hide<span>Something</span></div>
+                </a>
+                <button class="close-drawer-btn" id="closeDrawerBtn" aria-label="Close navigation drawer">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="drawer-links">
+                <a href="index.html#features"><i class="fas fa-sparkles"
+                        style="color: var(--accent-bright); width: 22px;"></i> Features</a>
+                <a href="move_data.html"><i class="fas fa-arrow-right-arrow-left"
+                        style="color: var(--accent-bright); width: 22px;"></i> Move Data</a>
+                <a href="hs_help.html"><i class="fas fa-question-circle"
+                        style="color: var(--accent-bright); width: 22px;"></i> Help Center</a>
+                <a href="pp.html" style="color: var(--accent-bright);"><i class="fas fa-user-shield"
+                        style="color: var(--accent-bright); width: 22px;"></i> Privacy Policy</a>
+            </nav>
+        </div>
+        <div style="margin-top: 2rem;">
+            <a href="https://play.google.com/store/apps/details?id=com.colure.app.privacygallery" class="btn-download"
+                style="width: 100%; justify-content: center; padding: 0.85rem;" target="_blank"
+                rel="noopener noreferrer">
+                <i class="fab fa-google-play"></i> Get on Google Play
+            </a>
+        </div>
+    </aside>
+
     <main>
+        <!-- Hero Section -->
         <section class="page-hero">
+            <div class="policy-tag">
+                <i class="fas fa-shield-check"></i> Sovereign Enclave
+            </div>
             <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: May 14, 2026</p>
+            <p class="last-updated">
+                <i class="fas fa-clock"></i> Last updated: May 14, 2026
+            </p>
+
+            <div class="enclave-badges">
+                <div class="enclave-badge">
+                    <i class="fas fa-microchip"></i> 100% Local On-Device Enclave
+                </div>
+                <div class="enclave-badge">
+                    <i class="fas fa-ban"></i> Zero Cloud Storage
+                </div>
+                <div class="enclave-badge">
+                    <i class="fas fa-eye-slash"></i> Zero Photo Telemetry
+                </div>
+            </div>
         </section>
 
+        <!-- Content Section -->
         <section class="content-section">
-            <div class="policy-container">
-                <p>Welcome to Hide Something (“hdsmth”, “we”, “our”, or “the app”).</p>
-                <p>Your privacy is important to us. This Privacy Policy explains what information may be processed when you use the app and how that information is handled.</p>
+            <article class="policy-container">
+                <p>Welcome to Hide Something ("hdsmth", "we", "our", or "the app").</p>
+                <p>Your privacy is important to us. This Privacy Policy explains what information may be processed when
+                    you use the app and how that information is handled.</p>
+
+                <div class="highlight-box">
+                    <strong>Core Commitment:</strong> Hide Something is engineered from the ground up on a local-first
+                    philosophy. Your private memories remain sovereign on your physical hardware. We never sell,
+                    inspect, or transfer your vault contents to cloud servers.
+                </div>
 
                 <h2>1. Local-First Privacy</h2>
                 <p>Hide Something is designed with a strong <strong>local-first privacy philosophy</strong>.</p>
@@ -327,10 +772,16 @@
                 <p>We <strong>do not operate</strong> a cloud storage service for your hidden files.</p>
 
                 <h2>2. Information That May Be Shared With Third Parties</h2>
-                <p>Although the app itself is designed to keep your data on-device, some features rely on third-party services.</p>
-                
+                <p>Although the app itself is designed to keep your data on-device, some features rely on third-party
+                    services.</p>
+
                 <h3>A. Google Services</h3>
-                <p>The app uses services provided by <a href="https://admob.google.com">Google AdMob</a>, <a href="https://firebase.google.com/products/analytics">Firebase Analytics</a>, and <a href="https://firebase.google.com/products/crashlytics">Firebase Crashlytics</a>.</p>
+                <p>The app uses services provided by <a href="https://admob.google.com" target="_blank"
+                        rel="noopener noreferrer">Google AdMob</a>, <a
+                        href="https://firebase.google.com/products/analytics" target="_blank"
+                        rel="noopener noreferrer">Firebase Analytics</a>, and <a
+                        href="https://firebase.google.com/products/crashlytics" target="_blank"
+                        rel="noopener noreferrer">Firebase Crashlytics</a>.</p>
                 <p>These services may collect limited technical or usage information, including:</p>
                 <ul>
                     <li>Device information</li>
@@ -339,27 +790,36 @@
                     <li>Advertising identifiers</li>
                     <li>General usage analytics</li>
                 </ul>
-                <p>These services are governed by Google’s own privacy policies:</p>
+                <p>These services are governed by Google's own privacy policies:</p>
                 <ul>
-                    <li><a href="https://policies.google.com/privacy">Google Privacy Policy</a></li>
-                    <li><a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a></li>
+                    <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google
+                            Privacy Policy</a></li>
+                    <li><a href="https://firebase.google.com/support/privacy" target="_blank"
+                            rel="noopener noreferrer">Firebase Privacy and Security</a></li>
                 </ul>
 
                 <h2>3. Similar Image Search Feature</h2>
-                <p>When you use the “Search Similar Images” feature, the image you choose for searching is uploaded to <a href="https://yandex.com/images/">Yandex Images</a> in order to perform the search.</p>
+                <p>When you use the "Search Similar Images" feature, the image you choose for searching is uploaded to
+                    <a href="https://yandex.com/images/" target="_blank" rel="noopener noreferrer">Yandex Images</a> in
+                    order to perform the search.
+                </p>
                 <p>This upload is necessary for the feature to work.</p>
-                <p>Please avoid using this feature with highly sensitive images if you do not want them transmitted to third-party image search services.</p>
+                <p>Please avoid using this feature with highly sensitive images if you do not want them transmitted to
+                    third-party image search services.</p>
                 <p>Yandex handles uploaded images according to its own privacy policy:</p>
                 <ul>
-                    <li><a href="https://yandex.com/legal/confidential/">Yandex Privacy Policy</a></li>
+                    <li><a href="https://yandex.com/legal/confidential/" target="_blank"
+                            rel="noopener noreferrer">Yandex Privacy Policy</a></li>
                 </ul>
 
                 <h2>4. Built-in Browser</h2>
                 <p>The app includes a private built-in browser.</p>
                 <p>When using the browser feature:</p>
                 <ul>
-                    <li>Websites you visit may receive information according to normal web browsing behavior, such as your IP address, browser requests, cookies, or other network data.</li>
-                    <li>Downloads, bookmarks, and browsing-related local data are stored on your device unless otherwise required by the visited website.</li>
+                    <li>Websites you visit may receive information according to normal web browsing behavior, such as
+                        your IP address, browser requests, cookies, or other network data.</li>
+                    <li>Downloads, bookmarks, and browsing-related local data are stored on your device unless otherwise
+                        required by the visited website.</li>
                     <li>We do not proxy or relay your browsing traffic through our own servers.</li>
                 </ul>
                 <p>Please review the privacy policies of the websites you visit.</p>
@@ -367,56 +827,168 @@
                 <h2>5. Permissions</h2>
                 <p>Depending on features you use, the app may request permissions such as:</p>
                 <ul>
-                    <li>Storage / media access</li>
-                    <li>Notification permission</li>
-                    <li>Biometric authentication</li>
-                    <li>Camera access (if applicable)</li>
+                    <li>Storage / media access (to encrypt and restore photos and videos)</li>
+                    <li>Notification permission (for background progress alerts)</li>
+                    <li>Biometric authentication (for fast unlock convenience)</li>
+                    <li>Camera access (if applicable for capturing media directly into the vault)</li>
                 </ul>
-                <p>These permissions are used only to provide app functionality.</p>
+                <p>These permissions are used solely to provide app functionality.</p>
 
                 <h2>6. Data Security</h2>
-                <p>We take reasonable measures to protect local app data on your device. However:</p>
+                <p>We take rigorous measures to protect local app data on your device. However:</p>
                 <ul>
-                    <li>No device or software can guarantee absolute security.</li>
+                    <li>No device or software can guarantee absolute security against all physical threats.</li>
                     <li>You are responsible for protecting access to your device and your unlock credentials.</li>
                 </ul>
 
-                <h2>7. Children’s Privacy</h2>
+                <h2>7. Children's Privacy</h2>
                 <p>The app is not intended for children under 13 years old.</p>
 
                 <h2>8. Changes to This Privacy Policy</h2>
-                <p>We may update this Privacy Policy from time to time. Updated versions will be published inside the app or on the app listing page.</p>
+                <p>We may update this Privacy Policy from time to time. Updated versions will be published inside the
+                    app and on our official domain.</p>
 
-                <h2>9. Contact</h2>
-                <p>If you have questions about this Privacy Policy, please contact us through the app store listing or official support channels associated with Hide Something.</p>
-            </div>
+                <h2>9. Contact Engineering</h2>
+                <p>If you have questions regarding this Privacy Policy or data security, please contact our team via <a
+                        href="mailto:coliferlab@gmail.com">coliferlab@gmail.com</a>.</p>
+            </article>
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
-        <a href="index.html" class="footer-logo-text">Hide<span>Something</span></a>
-        <div class="footer-links">
+        <a href="index.html" class="footer-logo" aria-label="Hide Something">
+            <img src="assets/img/hdsmth_logo.webp" alt="Ghost Logo" width="30" height="30">
+            <div>Hide<span>Something</span></div>
+        </a>
+
+        <div class="footer-nav">
             <a href="index.html#features">Features</a>
-            <a href="pp.html">Privacy Policy</a>
+            <a href="move_data.html">Move Data</a>
             <a href="hs_help.html">Help Center</a>
-            <a href="mailto:support@colure.org">Support</a>
+            <a href="pp.html">Privacy Policy</a>
+            <a href="mailto:coliferlab@gmail.com">Contact Support</a>
         </div>
+
         <p class="copyright">
-            &copy; 2026 Hide Something. Keep your personal life "truly personal". <br>
+            &copy; 2026 Hide Something (hdsmth). Keep your personal life "truly personal".<br>
             A product by Colure. All rights reserved.
         </p>
     </footer>
 
     <script>
-        // Header Scroll Effect
-        window.addEventListener('scroll', () => {
+        document.addEventListener("DOMContentLoaded", () => {
+            /* 1. LIVING AMBIENT CANVAS */
+            const canvas = document.getElementById('ambient-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 35;
+
+            function resizeCanvas() {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.speedX = (Math.random() - 0.5) * 0.45;
+                    this.speedY = (Math.random() - 0.5) * 0.45;
+                    this.opacity = Math.random() * 0.4 + 0.1;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
+                        this.reset();
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(52, 231, 228, ${this.opacity})`;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = 'rgba(32, 201, 151, 0.4)';
+                    ctx.fill();
+                }
+            }
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, width, height);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animateCanvas);
+            }
+            animateCanvas();
+
+            /* 2. SCROLL PROGRESS & HEADER */
+            const progressBar = document.getElementById('scroll-progress');
             const header = document.getElementById('main-header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+
+            window.addEventListener('scroll', () => {
+                const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = totalScroll > 0 ? (window.scrollY / totalScroll) * 100 : 0;
+                progressBar.style.width = `${progress}%`;
+
+                if (window.scrollY > 40) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            /* 3. MOBILE DRAWER */
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileDrawer = document.getElementById('mobileDrawer');
+            const drawerOverlay = document.getElementById('drawerOverlay');
+            const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+
+            function toggleMobileDrawer(open) {
+                if (!mobileDrawer || !drawerOverlay) return;
+                if (open) {
+                    mobileDrawer.classList.add('open');
+                    drawerOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    mobileDrawer.classList.remove('open');
+                    drawerOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleMobileDrawer(true);
+                });
+            }
+
+            if (closeDrawerBtn) {
+                closeDrawerBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleMobileDrawer(false);
+                });
+            }
+
+            if (drawerOverlay) {
+                drawerOverlay.addEventListener('click', () => toggleMobileDrawer(false));
             }
         });
     </script>
 </body>
+
 </html>
